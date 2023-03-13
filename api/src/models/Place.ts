@@ -1,5 +1,3 @@
-import mongoose, { Document } from "mongoose";
-
 export type PlaceDocument = Document & {
   owner: string;
   title: string;
