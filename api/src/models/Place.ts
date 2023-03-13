@@ -1,5 +1,3 @@
-import mongoose, { Document } from "mongoose";
-import User from "./User";
 export type PlaceDocument = Document & {
   owner: string;
   title: string;
@@ -26,5 +24,4 @@ const PlaceSchema = new mongoose.Schema({
   maxGuests: { type: Number },
   price: { type: Number },
 });
-
 export default mongoose.model<PlaceDocument>("Place", PlaceSchema);
