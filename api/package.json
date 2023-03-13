@@ -1,0 +1,7 @@
+{
+  "name": "BookMe",
+  "version": "1.0.0",
+  "description": "Booking app",
+  "main": "index.js",
+  "license": "MIT"
+}
