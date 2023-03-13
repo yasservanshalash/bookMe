@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+import User from "./User";
 export type PlaceDocument = Document & {
   owner: string;
   title: string;
@@ -12,7 +14,7 @@ export type PlaceDocument = Document & {
   price: number;
 };
 const PlaceSchema = new mongoose.Schema({
-  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: User },
   title: { type: String },
   address: { type: String },
   photos: { type: [String] },
