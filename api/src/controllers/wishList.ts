@@ -8,7 +8,7 @@ export const createWishListController = async (req: Request, res: Response) => {
 
     const newList = new WishList({
       userId: userId,
-      placeId: placeId,
+      places: [placeId],
     });
 
     const createList = await wishListService.addToWishList(newList);

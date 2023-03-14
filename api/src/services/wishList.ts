@@ -16,7 +16,10 @@ const removeFromWishList = async (
 const getAllWishListByUserId = async (
   userIdRequest: string
 ): Promise<WishListDocument[]> => {
-  return WishList.find({ userId: userIdRequest }).populate("places");
+  return WishList.find({ userId: userIdRequest }).populate({
+    path: "places",
+    options: { strictPopulate: false },
+  });
 };
 
 export default { addToWishList, removeFromWishList, getAllWishListByUserId };
