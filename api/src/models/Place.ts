@@ -12,6 +12,7 @@ export type PlaceDocument = Document & {
   checkOut: boolean;
   maxGuests: number;
   price: number;
+  place: string;
 };
 const PlaceSchema = new mongoose.Schema({
   owner: { type: mongoose.Schema.Types.ObjectId, ref: User },
@@ -25,5 +26,6 @@ const PlaceSchema = new mongoose.Schema({
   checkOut: { type: Boolean },
   maxGuests: { type: Number },
   price: { type: Number },
+  place: { type: String },
 });
 export default mongoose.model<PlaceDocument>("Place", PlaceSchema);
