@@ -1,8 +1,9 @@
-import { Box, Divider, IconButton, InputBase, Paper, Typography } from '@mui/material'
+import { Box, Divider, IconButton, InputBase, Paper, Typography, Button } from '@mui/material'
 import React, { useState} from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import EditLocationIcon from '@mui/icons-material/EditLocation';
+import PersonIcon from '@mui/icons-material/Person';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import Select from 'react-select'
 
@@ -113,7 +114,7 @@ const SearchFilter = () => {
         }}
       >
         <IconButton disabled sx={{ p: "10px" }}>
-            <EditLocationIcon sx={{color: "black"}}/>
+            <PersonIcon sx={{color: "black"}}/>
         </IconButton>
         <InputBase
           sx={{ ml: 1, flex: 2 }}
@@ -126,6 +127,7 @@ const SearchFilter = () => {
           }}
         />
             </Paper>
+            <Button variant="contained" sx={{width: "308px", borderRadius: "20px", mt: 7, p:1}}>Search</Button>
         </Box>
     </Box>
   )
