@@ -4,12 +4,13 @@ const createUser = async (newUser: UserDocument): Promise<UserDocument> => {
   return newUser.save();
 };
 //for admin want to see all users
-const getUser = async (): Promise<UserDocument[]> => {
+const getAllUser = async (): Promise<UserDocument[]> => {
+  console.log(User.find(), "get alls");
   return User.find();
 };
 
-const getUserById = async (userId: string): Promise<UserDocument | null> => {
-  const user = User.findOne({ userId: userId });
+const getUserById = async (userId: String): Promise<UserDocument | null> => {
+  const user = User.findOne({ _id: userId });
   return user;
 };
 const getUserByEmail = async (email: string): Promise<UserDocument | null> => {
@@ -17,8 +18,8 @@ const getUserByEmail = async (email: string): Promise<UserDocument | null> => {
   return user;
 };
 
-const deleteByEmail = async (email: string): Promise<UserDocument | null> => {
-  return User.findByIdAndRemove(email);
+const deleteByEmail = async (userId: String): Promise<UserDocument | null> => {
+  return User.findByIdAndRemove(userId);
 };
 
 const updateById = async (
@@ -30,7 +31,7 @@ const updateById = async (
 
 export default {
   createUser,
-  getUser,
+  getAllUser,
   deleteByEmail,
   updateById,
   getUserByEmail,

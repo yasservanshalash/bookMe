@@ -7,6 +7,6 @@ import {
 const router = Router();
 router.post("", createPlaceController);
 router.put("/:placeId", updatePlaceController);
-router.get("/places", getAllPlacesController);
+router.get("/alls", getAllPlacesController);
 
 export default router;

@@ -13,10 +13,10 @@ const removeFromWishList = async (
   return WishList.findByIdAndRemove({ PlaceId: PlaceId });
 };
 
-const getAllOrdersByUserId = async (
+const getAllWishListByUserId = async (
   userIdRequest: string
 ): Promise<WishListDocument[]> => {
-  return WishList.find({ userId: userIdRequest }).populate("place");
+  return WishList.find({ userId: userIdRequest }).populate("places");
 };
 
-export default { addToWishList, removeFromWishList, getAllOrdersByUserId };
+export default { addToWishList, removeFromWishList, getAllWishListByUserId };

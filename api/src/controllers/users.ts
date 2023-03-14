@@ -9,7 +9,6 @@ export const createUserController = async (req: Request, res: Response) => {
   try {
     const { name, email, password, avatar, isAdmin, isBanned, phoneNumber } =
       req.body;
-
     const saltRounds = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -41,21 +40,24 @@ export const loginWithPasswordController = async (
   try {
     const userData = await UserServices.getUserByEmail(req.body.email);
     if (!userData) {
-      res.json({ message: `No user with email ${req.body.email}` });
+      res.status(401).json({
+        massage: `The email ${req.body.email} doesn't exist`,
+      });
       return;
     }
 
-    const passwordDB = userData.password;
-    const plainPassword = req.body.password;
+    const databasePassword = userData.password;
+    const inputPassword = req.body.password;
 
-    const match = await bcrypt.compare(plainPassword, passwordDB);
-
+    const match = await bcrypt.compare(inputPassword, databasePassword);
     if (!match) {
-      res.json({ message: "Wrong password." });
+      console.log("inside match");
+      res.json("The password does not exist!");
       return;
     }
 
-    res.json({ id: userData?._id, token: generateToken(userData._id) });
+    const token = generateToken(userData._id, req.body.email);
+    res.status(200).json({ userData, token });
   } catch (error) {
     console.log(error);
   }
@@ -66,9 +68,9 @@ export const displayUserInformationController = async (
   res: Response
 ) => {
   try {
-    const userData = await UserServices.getUserById(req.params.id);
+    const userData = await UserServices.getUserById(req.params.userId);
     if (!userData) {
-      res.json({ message: `No user with id ${req.params.id}` });
+      res.json({ message: `No user with id ${req.params.userId}` });
       return;
     }
     res.json(userData);
@@ -79,8 +81,44 @@ export const displayUserInformationController = async (
 
 export const updateUserByIdController = async (req: Request, res: Response) => {
   try {
-    const updatedUser = await UserServices.updateById(req.params.id, req.body);
+    const saltRounds = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
+    req.body.password = hashPassword;
+    const updatedUser = await UserServices.updateById(
+      req.params.userId,
+      req.body
+    );
     res.json(updatedUser);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const displayAllInformationController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const userData = await UserServices.getAllUser();
+    if (!userData) {
+      res.json({ message: `No users stored in data base` });
+      return;
+    }
+    res.json(userData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUserByIdController = async (req: Request, res: Response) => {
+  try {
+    const userData = await UserServices.deleteByEmail(req.params.userId);
+    const userDataAfter = await UserServices.getAllUser();
+    if (!userData) {
+      res.json({ message: `No  ${req.params.userId} stored in data base` });
+      return;
+    }
+    res.json(userDataAfter);
   } catch (error) {
     console.log(error);
   }
