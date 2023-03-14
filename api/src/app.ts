@@ -1,9 +1,13 @@
 //server here
-import Express from "express"
-import cors from  "cors"
+import Express from "Express";
+import cors from "cors";
+//routes
+import userRouter from "./routes/users";
+import placeRouter from "./routes/place";
+const app = Express();
+app.use(Express.json());
+app.use(cors());
 
-const app =Express()
-app.use(Express.json())
-app.use(cors())
-
+app.use("/users", userRouter);
+app.use("/place", placeRouter);
 export default app;
