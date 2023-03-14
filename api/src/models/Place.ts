@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Document } from "mongoose";
 import User from "./User";
 export type PlaceDocument = Document & {
   owner: string;

@@ -3,11 +3,15 @@ import User, { UserDocument } from "../models/User";
 const createUser = async (newUser: UserDocument): Promise<UserDocument> => {
   return newUser.save();
 };
-
+//for admin want to see all users
 const getUser = async (): Promise<UserDocument[]> => {
   return User.find();
 };
 
+const getUserById = async (userId: string): Promise<UserDocument | null> => {
+  const user = User.findOne({ userId: userId });
+  return user;
+};
 const getUserByEmail = async (email: string): Promise<UserDocument | null> => {
   const user = User.findOne({ email: email });
   return user;
@@ -30,4 +34,5 @@ export default {
   deleteByEmail,
   updateById,
   getUserByEmail,
+  getUserById,
 };
