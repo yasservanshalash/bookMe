@@ -1,5 +1,6 @@
 import { Box, Button, Toolbar, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -14,9 +15,13 @@ const NavBar = () => {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "flex-end", gap: 10 }}>
-          <Typography variant="h4" sx={{fontWeight: "bolder"}}>BookMe.com</Typography>
+        <Link to="/" style={{textDecoration: "none"}}>
+          <Typography variant="h4" sx={{fontWeight: "bolder", textDecoration: "none", color:"black"}}>BookMe.com</Typography>
+          </Link>
           <Box sx={{display: "flex", alignItems: "center"}}>
-            <Typography>Properties</Typography>
+            <Link to="/properties" style={{textDecoration: "none"}}>
+            <Typography sx={{textDecoration: "none", color:"black"}}>Properties</Typography>
+            </Link>
           </Box>
         </Box>
         <Box sx={{display: "flex",alignItems: "flex-end", gap: 5, mr: 5}}>
