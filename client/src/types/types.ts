@@ -1,4 +1,5 @@
 export type User = {
+    _id: string;
     name: string;
     email: string;
     avatar: string;
@@ -8,6 +9,7 @@ export type User = {
 }
 
 export type Place = {
+  _id: string;
     owner: string;
   title: string;
   address: string;

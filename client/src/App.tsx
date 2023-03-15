@@ -10,6 +10,7 @@ import PropertiesPage from './pages/PropertiesPage';
 import { AppDispatch, RootState } from './redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPlacesData } from './redux/thunk/placesThunk';
+import PropertyDetails from './pages/PropertyDetails';
 function App() {
   const places = useSelector((state: RootState) => state.places.places)
   const dispatchThunk = useDispatch<AppDispatch>();
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/properties" element={<PropertiesPage />} /> 
+        <Route path="/properties/:id" element={<PropertyDetails />} />
         </Routes>
       <Footer />
     </Box>
