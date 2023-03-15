@@ -8,9 +8,10 @@ const addToWishList = async (
 };
 
 const removeFromWishList = async (
-  PlaceId: String
+  userId: string,
+  placeId: string
 ): Promise<WishListDocument | null> => {
-  return WishList.findByIdAndRemove({ PlaceId: PlaceId });
+  return WishList.findOneAndDelete({ userId: userId, places: placeId });
 };
 
 const getAllWishListByUserId = async (
@@ -23,5 +24,16 @@ const getAllWishListByUserId = async (
     })
     .populate({ path: "userId" });
 };
-
-export default { addToWishList, removeFromWishList, getAllWishListByUserId };
+const checkWishListAlreadyExistByUserId = async (
+  userId: string,
+  placeId: string
+): Promise<WishListDocument[] | null> => {
+  const result = WishList.find({ userId: userId, places: placeId });
+  return result;
+};
+export default {
+  addToWishList,
+  removeFromWishList,
+  getAllWishListByUserId,
+  checkWishListAlreadyExistByUserId,
+};

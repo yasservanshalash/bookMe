@@ -5,12 +5,23 @@ import wishListService from "../services/wishList";
 export const createWishListController = async (req: Request, res: Response) => {
   try {
     const { userId, placeId } = req.body;
-
+    const checkExist: WishListDocument[] | null =
+      await wishListService.checkWishListAlreadyExistByUserId(
+        userId,
+        placeId.toString()
+      );
     const newList = new WishList({
       userId: userId,
       places: [placeId],
     });
 
+    if (checkExist?.length) {
+      res.json({
+        status: "failed",
+        message: `You have choose this place already.`,
+      });
+      return;
+    }
     const createList = await wishListService.addToWishList(newList);
     if (createList) {
       res.json({
@@ -36,6 +47,26 @@ export const getWishListByUserId = async (req: Request, res: Response) => {
       return;
     }
     res.json(wishList);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteWishList = async (req: Request, res: Response) => {
+  console.log("call me");
+  const { userId, placeId } = req.body;
+  try {
+    console.log("two values", userId, placeId.toString());
+    const wishListRemove = await wishListService.removeFromWishList(
+      userId,
+      placeId.toString()
+    );
+    console.log("Wish remove is", wishListRemove);
+    if (!wishListRemove) {
+      res.json({ message: `No wish list with id ${req.params.userId}` });
+      return;
+    }
+    res.json(wishListRemove);
   } catch (error) {
     console.log(error);
   }
