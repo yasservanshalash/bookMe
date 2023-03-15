@@ -15,6 +15,7 @@ export type PlaceDocument = Document & {
   price: number;
   place: string;
   isAvailable: boolean;
+  
 };
 const PlaceSchema = new mongoose.Schema({
   owner: { type: mongoose.Schema.Types.ObjectId, ref: User },
