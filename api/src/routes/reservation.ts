@@ -1,10 +1,6 @@
 import { Router } from "Express";
-import {
-  createReservationController,
-  getReservationByUserIdController,
-  deleteReservationByIdController,
-} from "../controllers/reservation";
-import passport from "passport";
+import { createReservationController, getReservationByUserIdController,deleteReservationByIdController } from "../controllers/reservation";
+import passport from "passport"
 
  const router = Router();
 
