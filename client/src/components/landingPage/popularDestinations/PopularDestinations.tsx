@@ -19,13 +19,13 @@ const PopularDestinations = () => {
           justifyContent: "center",
           alignContent: "center",
           my: 4,
-          gap: 2
+          gap: 1
         }}
       >
         <Box sx={{ position: "relative" }}>
           <img
             src="https://images.unsplash.com/photo-1558642084-fd07fae5282e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1036&q=80"
-            style={{ width: "360px", height: "430px", objectFit: "cover", borderRadius: "20px"}}
+            style={{ width: "300px", height: "430px", objectFit: "cover", borderRadius: "20px"}}
             className="img"
           />
           <Chip label="Spain" variant="outlined" sx={{
@@ -48,7 +48,7 @@ const PopularDestinations = () => {
           <Box sx={{position: "relative"}}>
             <img
               src="https://images.unsplash.com/photo-1526129318478-62ed807ebdf9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
-              style={{ width: "360px", height: "256px", objectFit: "cover", borderRadius: "20px" }}
+              style={{ width: "300px", height: "256px", objectFit: "cover", borderRadius: "20px" }}
               className="img"
 
             />
@@ -64,7 +64,7 @@ const PopularDestinations = () => {
           <Box sx={{position: "relative"}}>
             <img
               src="https://images.unsplash.com/photo-1585680398578-8cf7a4b9c2df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80"
-              style={{ width: "360px", height: "160px", objectFit: "cover", borderRadius: "20px" }}
+              style={{ width: "300px", height: "160px", objectFit: "cover", borderRadius: "20px" }}
               className="img"
 
             />
@@ -82,7 +82,7 @@ const PopularDestinations = () => {
           <img
             src="https://images.unsplash.com/photo-1559686533-c377c07f1a3a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80"
             style={{
-              width: "360px",
+              width: "300px",
               height: "430px",
               borderRadius: "20px",
               objectFit: "cover",
@@ -110,7 +110,7 @@ const PopularDestinations = () => {
             <Box sx={{position: "relative"}}>
             <img
             src="https://images.unsplash.com/photo-1608853826477-69a6d92bad7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
-            style={{ width: "360px", height: "160px", objectFit: "cover",borderRadius: "20px" }}
+            style={{ width: "300px", height: "160px", objectFit: "cover",borderRadius: "20px" }}
             className="img"
 
           />
@@ -126,7 +126,7 @@ const PopularDestinations = () => {
             <Box sx={{position: "relative"}}>
             <img
             src="https://images.unsplash.com/photo-1561560392-39ff98f2d54c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=989&q=80"
-            style={{ width: "360px", height: "255px", objectFit: "cover",borderRadius: "20px" }}
+            style={{ width: "300px", height: "255px", objectFit: "cover",borderRadius: "20px" }}
             className="img"
 
           />
