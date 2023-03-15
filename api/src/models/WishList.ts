@@ -10,4 +10,4 @@ const WishListSchema = new mongoose.Schema({
   places: [{ type: mongoose.Schema.Types.ObjectId, ref: Place }],
 });
 
-export default mongoose.model<WishListDocument>(" WishList", WishListSchema);
+export default mongoose.model<WishListDocument>("WishList", WishListSchema);
