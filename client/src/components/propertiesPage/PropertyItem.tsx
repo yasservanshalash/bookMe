@@ -60,7 +60,7 @@ const PropertyItem = ({property}: {property: Place}) => {
           <Box sx={{alignSelf: "flex-end", display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "flex-end", mr: 3, gap: 0.5}}>
             <Typography variant="h6" sx={{fontWeight: "bold"}}>{`$${property.price}`}</Typography>
             <Typography>3 nights, 2 guests</Typography>
-            <Link to={`/properties/${property._id}`}>
+            <Link to={`/properties/${property._id}`} style={{textDecoration: "none"}}>
             <Button variant="contained" sx={{borderRadius: "20px"}}>See more</Button>
 
             </Link>
