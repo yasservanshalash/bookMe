@@ -5,7 +5,10 @@ const addPlace = async (place: PlaceDocument): Promise<PlaceDocument> => {
 };
 //to get all places
 const getPlace = async (): Promise<PlaceDocument[]> => {
-  return Place.find();
+  return Place.find().populate({
+    path: "owner",
+    options: { strictPopulate: false },
+  });
 };
 //to get place based name or location
 //filtering
