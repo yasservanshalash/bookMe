@@ -14,7 +14,7 @@ const PropertyDetails = () => {
   );
 
   return (
-    <Box sx={{ width: "90%", margin: "50px auto" }}>
+    <Box sx={{ width: "85%", margin: "50px auto" }}>
       <Box>
         <IconButton>
           <ArrowBackIcon sx={{ color: "black" }} />
