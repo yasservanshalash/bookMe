@@ -51,7 +51,7 @@ const PropertyDetails = () => {
               <Box
                 sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1 }}
               >
-                {place?.photos.slice(1, 4).map((photo) => {
+                {place?.photos.slice(1, 5).map((photo) => {
                   return (
                     <img
                       src={photo}
