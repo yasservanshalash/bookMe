@@ -19,6 +19,7 @@ const PopularDestinations = () => {
           justifyContent: "center",
           alignContent: "center",
           my: 4,
+          gap: 2
         }}
       >
         <Box sx={{ position: "relative" }}>
