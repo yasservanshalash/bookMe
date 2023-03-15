@@ -15,7 +15,7 @@ function App() {
   const dispatchThunk = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatchThunk(fetchPlacesData);
+    dispatchThunk(fetchPlacesData());
   }, [])
   console.log(places)
   return (

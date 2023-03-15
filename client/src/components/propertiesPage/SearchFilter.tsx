@@ -11,6 +11,10 @@ const SearchFilter = () => {
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().split('T')[0]);
   const [checkOutDate, setCheckOutDate] = useState(new Date().toISOString().split('T')[0]);
 
+
+  /**
+   * not needed anymore
+   */
   const options = [
   ]
   
@@ -18,7 +22,6 @@ const SearchFilter = () => {
     options.push({value: i, label: i})
   }
 
-  console.log(options)
   const checkInHandler = (e: any) => {
     setCheckInDate(e.target.value);
     };
