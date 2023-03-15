@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Document } from "mongoose";
 import User from "./User";
 export type PlaceDocument = Document & {
-  owner: [];
+  owner: string;
   title: string;
   address: string;
   photos: [string];
@@ -21,7 +21,7 @@ const PlaceSchema = new mongoose.Schema({
   title: { type: String },
   address: { type: String },
   photos: { type: [String] },
-  descriptions: { type: String },
+  description: { type: String },
   perks: { type: [String] },
   extraInfo: { type: String },
   checkIn: { type: Boolean },

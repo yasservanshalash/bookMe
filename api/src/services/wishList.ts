@@ -4,6 +4,8 @@ import { WishListDocument } from "../models/WishList";
 const addToWishList = async (
   wishList: WishListDocument
 ): Promise<WishListDocument> => {
+  console.log(" iam inside wishlist is");
+  console.log("wishlist is", wishList);
   return wishList.save();
 };
 
