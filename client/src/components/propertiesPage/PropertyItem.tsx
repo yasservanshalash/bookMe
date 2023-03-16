@@ -1,15 +1,21 @@
 import { Box, Button, Chip, Paper, Typography } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../../redux/store";
 import { Place } from "../../types/types";
 
 const PropertyItem = ({property}: {property: Place}) => {
+  const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
+  const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
+  const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
+
   return (
     <Paper sx={{display: "flex", justifyContent: "space-between"}}>
         <Box sx={{display: "flex", textAlign: "left"}}>
             <img
                src={property.photos[0]}
-               alt="image"
+               alt="property photos"
                style={{ width: "200px", height: "200px", objectFit: "cover", padding: "16px", borderRadius: "20px" }}
              />
             <Box
@@ -50,7 +56,7 @@ const PropertyItem = ({property}: {property: Place}) => {
         >
           <Box sx={{display: "flex", alignItems: "center", gap: 2}}>
             <Box sx={{display: "flex", flexDirection: "column"}} >
-              <Typography variant="subtitle2" sx={{fontSize: "70%"}}>Execllent</Typography>
+              <Typography variant="subtitle2" sx={{fontSize: "70%"}}>Excellent</Typography>
               <Typography variant="subtitle2" sx={{fontSize: "70%"}}>1,920 reviews</Typography>
             </Box>
             <Box>
@@ -58,8 +64,8 @@ const PropertyItem = ({property}: {property: Place}) => {
             </Box>
           </Box>
           <Box sx={{alignSelf: "flex-end", display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "flex-end", mr: 3, gap: 0.5}}>
-            <Typography variant="h6" sx={{fontWeight: "bold"}}>{`$${property.price}`}</Typography>
-            <Typography>3 nights, 2 guests</Typography>
+            <Typography variant="h6" sx={{fontWeight: "bold"}}>{`$${numberOfVisitors === 1 ? property.price : property.price * (numberOfDays <= 0 ? 1 : numberOfDays) }`}</Typography>
+            <Typography>{numberOfDays <= 0 ? "1 night" : `${numberOfDays} nights`} , {numberOfVisitors === 1 ? "1 guest": `${numberOfVisitors} guests`}</Typography>
             <Link to={`/properties/${property._id}`} style={{textDecoration: "none"}}>
             <Button variant="contained" sx={{borderRadius: "20px"}}>See more</Button>
 

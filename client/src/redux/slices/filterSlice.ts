@@ -9,8 +9,8 @@ type initialStateType = {
 
 const initialState = {
     searchTerm: "",
-    numOfDays: 0,
-    numberOfVisitors: 0
+    numOfDays: 1,
+    numberOfVisitors: 1
 }
 
 const filterSlice = createSlice({

@@ -14,7 +14,7 @@ const SearchFilter = () => {
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().split('T')[0]);
   const [checkOutDate, setCheckOutDate] = useState(new Date().toISOString().split('T')[0]);
   const [term, setTerm] = useState("");
-  const [numOfGuests, setNumOfGuests] = useState(0);
+  const [numOfGuests, setNumOfGuests] = useState(1);
 
   const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
   const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
