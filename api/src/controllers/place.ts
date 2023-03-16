@@ -2,7 +2,7 @@ import { Request, Response } from "Express";
 
 import Place from "../models/Place";
 import PlaceService from "../services/place";
-
+import UserService from "../services/users";
 export const createPlaceController = async (req: Request, res: Response) => {
   try {
     const {
@@ -36,8 +36,20 @@ export const createPlaceController = async (req: Request, res: Response) => {
       place: place,
       isAvailable: isAvailable,
     });
-    const product = await PlaceService.addPlace(places);
-    res.json(product);
+    //logic for add places for admin
+    //let placeStore;
+    const isLoginAdmin = await UserService.getUserById(owner);
+    console.log(isLoginAdmin);
+    if (
+      isLoginAdmin?.isAdmin == true ||
+      isLoginAdmin?.name == "admin" ||
+      isLoginAdmin?.email == "admin@gmail.com"
+    ) {
+      const placeStore = await PlaceService.addPlace(places);
+      res.json(placeStore);
+      return;
+    }
+    res.json({ message: "You are not a admin" });
   } catch (error) {
     console.log(error);
   }

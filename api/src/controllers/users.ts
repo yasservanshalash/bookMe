@@ -73,6 +73,7 @@ export const displayUserInformationController = async (
       res.json({ message: `No user with id ${req.params.userId}` });
       return;
     }
+
     res.json(userData);
   } catch (error) {
     console.log(error);
