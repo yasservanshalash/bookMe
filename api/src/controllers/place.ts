@@ -63,3 +63,12 @@ export const updatePlaceController = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const getPlaceById = async (req: Request, res: Response) => {
+  try {
+    const getPlace = await PlaceService.getplaceByID(req.params.placeId);
+    res.json(getPlace);
+  } catch (error) {
+    console.log(error);
+  }
+};
