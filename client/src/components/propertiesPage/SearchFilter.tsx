@@ -8,6 +8,7 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import Select from 'react-select'
 import { useDispatch, useSelector } from 'react-redux';
 import { filterActions } from '../../redux/slices/filterSlice';
+import { RootState } from '../../redux/store';
 
 const SearchFilter = () => {
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().split('T')[0]);
@@ -15,18 +16,21 @@ const SearchFilter = () => {
   const [term, setTerm] = useState("");
   const [numOfGuests, setNumOfGuests] = useState(0);
 
-  // const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
-  // const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
-  // const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
+  const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
+  const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
+  const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
 
   const dispatch = useDispatch();
   const searchHandler = () => {
+    console.log("term", term)
+    console.log("number of days", Number(Number(new Date(checkOutDate)) - Number(new Date(checkInDate)))/ 86400000);
+    console.log("number of guests", numOfGuests)
     dispatch(filterActions.setTerm(term));
     dispatch(filterActions.setNumOfDays(Number(Number(new Date(checkOutDate)) - Number(new Date(checkInDate)))/ 86400000))
     dispatch(filterActions.setNumberOfVisitors(numOfGuests))
-    // console.log("term", searchTerm)
-    // console.log("number of days", numOfDays)
-    // console.log("number of guests", numberOfVisitors)
+    console.log("term", searchTerm)
+    console.log("number of days", numberOfDays)
+    console.log("number of guests", numberOfVisitors)
   }
   /**
    * not needed anymore
@@ -68,6 +72,7 @@ const SearchFilter = () => {
           sx={{ ml: 1, flex: 2 }}
           placeholder="Search properties"
           inputProps={{ "aria-label": "search properties" }}
+          onChange={(e) => setTerm(e.target.value)}
         />
             </Paper>
             <Paper
