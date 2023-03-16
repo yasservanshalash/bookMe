@@ -5,7 +5,10 @@ const LovedPlace = ({name, city, price, image, rating}: {name: string, city: str
   return (
     <Paper sx={{width:"250px", display: "flex", flexDirection: "column", borderRadius: "20px"}}>
         <Box sx={{position: "relative"}}>
-        <img src={image} style={{width: "235px", height: "250px", padding: "12px", borderRadius: "20px"}}/>
+          <Box sx={{display: "flex", justifyContent: 'center'}}>
+          <img src={image} style={{width: "235px", height: "250px", padding: "12px", borderRadius: "20px"}}/>
+
+          </Box>
         <Chip label={rating} variant="outlined" sx={{position: "absolute", top: "30px", left: "30px", backgroundColor: "#a2cf6e",px: 0.5    , borderRadius: "20px",}}/>
         </Box>
         <Box sx={{width: "90%", margin: "0 auto 20px auto",display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start", position: "relative"}}>
