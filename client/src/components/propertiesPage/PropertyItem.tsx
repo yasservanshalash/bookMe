@@ -1,14 +1,14 @@
 import { Box, Button, Chip, Paper, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
+import { Place } from "../../types/types";
 
-const PropertyItem = () => {
+const PropertyItem = ({property}: {property: Place}) => {
   return (
     <Paper sx={{display: "flex", justifyContent: "space-between"}}>
         <Box sx={{display: "flex", textAlign: "left"}}>
             <img
-               src={
-                 "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-               }
+               src={property.photos[0]}
                alt="image"
                style={{ width: "200px", height: "200px", objectFit: "cover", padding: "16px", borderRadius: "20px" }}
              />
@@ -23,7 +23,7 @@ const PropertyItem = () => {
             }}
           >
             <Box>
-              <Typography sx={{fontWeight: "bold"}}>Hotel Norrebro</Typography>
+              <Typography sx={{fontWeight: "bold"}}>{property.title}</Typography>
               <Typography variant="subtitle2" sx={{fontWeight: "lighter"}}>Free Cancellation</Typography>
             </Box>
             <Box sx={{display: "flex", flexDirection: "column"}}>
@@ -58,9 +58,12 @@ const PropertyItem = () => {
             </Box>
           </Box>
           <Box sx={{alignSelf: "flex-end", display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "flex-end", mr: 3, gap: 0.5}}>
-            <Typography variant="h6" sx={{fontWeight: "bold"}}>$180</Typography>
+            <Typography variant="h6" sx={{fontWeight: "bold"}}>{`$${property.price}`}</Typography>
             <Typography>3 nights, 2 guests</Typography>
+            <Link to={`/properties/${property._id}`} style={{textDecoration: "none"}}>
             <Button variant="contained" sx={{borderRadius: "20px"}}>See more</Button>
+
+            </Link>
           </Box>
         </Box>
         </Box>
