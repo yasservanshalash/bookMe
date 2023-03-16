@@ -3,9 +3,11 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
+  const nav = useNavigate();
   type InitialValues = {
     email: string;
     password: string | RegExp;
@@ -38,6 +40,14 @@ const Login = () => {
         validationSchema={FormSchema}
         onSubmit={(values: InitialValues) => {
           console.log(values);
+          axios
+          .post("http://localhost:8013/users/login", values)
+          .then((response) => {
+              console.log(response.data)
+              if(response.data.token) {
+                nav('/')
+              }
+          });
         }}
       >
         {({ errors, touched, handleChange }) => {

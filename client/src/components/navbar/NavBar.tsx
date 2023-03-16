@@ -1,7 +1,7 @@
 import { Box, Button, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-
+import logo from "../../assets/logo.png"
 const NavBar = () => {
   return (
     <Box sx={{display: "flex", mt: 2}}>
@@ -14,9 +14,9 @@ const NavBar = () => {
           margin: "0 auto",
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "flex-end", gap: 10 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 5, my: 2 }}>
         <Link to="/" style={{textDecoration: "none"}}>
-          <Typography variant="h4" sx={{fontWeight: "bolder", textDecoration: "none", color:"black"}}>BookMe.com</Typography>
+          <img src={logo} alt="logo" style={{transform: "scale(0.8)"}} />
           </Link>
           <Box sx={{display: "flex", alignItems: "center"}}>
             <Link to="/properties" style={{textDecoration: "none"}}>
