@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import { Link } from "react-router-dom";
 
 const Login = () => {
   type InitialValues = {
@@ -31,7 +32,7 @@ const Login = () => {
   });
 
   return (
-    <Box>
+    <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", my: 3}}>
       <Formik
         initialValues={initialValues}
         validationSchema={FormSchema}
@@ -41,11 +42,12 @@ const Login = () => {
       >
         {({ errors, touched, handleChange }) => {
           return (
+            <Box>
             <Form>
               <Box sx={{width: "20vw", height: "60vh", display: "flex", flexDirection: "column", gap: 2, p: 2, border: "1px solid lightgray", borderRadius: "10px", position: "relative"}}>
-                <IconButton sx={{position: "absolute", top: "10px", right: "10px"}}>
+                {/* <IconButton sx={{position: "absolute", top: "10px", right: "10px"}}>
                     <CloseIcon sx={{transform: "scale(0.75)"}}/>
-                </IconButton>
+                </IconButton> */}
                 <Typography sx={{fontWeight: "bold"}}>Login</Typography>
                 <Button variant="contained">Log in with Google</Button>
                 <Divider />
@@ -77,10 +79,10 @@ const Login = () => {
                     <Typography>Remember me</Typography>
                 </Box>
                 <Button type="submit" variant="contained" sx={{borderRadius: "5px", textTransform: "none"}}>Log In</Button>
-                <Typography color="primary" sx={{textAlign: "center"}}>Forgot Password?</Typography>
+                <Typography color="primary" sx={{textAlign: "center", fontSize: "80%"}}>Forgot Password?</Typography>
                 <Divider />
-                <Typography>Don't have an account?</Typography>
-                <Button variant="outlined" sx={{border: "none"}}>Sign up</Button>
+                <Typography variant="subtitle2" sx={{textAlign: "center"}}>Don't have an account?</Typography>
+                <Typography color="primary" variant="subtitle1" sx={{border: "none", textTransform: "none", textAlign: "center", textDecoration: "none"}} component={Link} to="/signup">Sign up</Typography>
 
               </Box>
               {errors.email && touched.email ? (
@@ -94,6 +96,7 @@ const Login = () => {
                 </Typography>
               ) : null}
             </Form>
+            </Box>
           );
         }}
       </Formik>
