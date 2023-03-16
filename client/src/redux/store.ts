@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import filterReducer from "./slices/filterSlice";
 import placeReducer from "./slices/placesSlice";
 import userReducer from "./slices/userSlice";
 const store = configureStore({
     reducer: {
         places: placeReducer,
-        users: userReducer
+        users: userReducer,
+        filter: filterReducer
     }
 })
 

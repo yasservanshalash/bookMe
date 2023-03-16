@@ -3,10 +3,12 @@ import { Place } from "../../types/types";
 
 type initialStateType = {
     places: Place[];
+    searchTerm: string;
 }
 
 const initialState: initialStateType = {
-    places: []
+    places: [],
+    searchTerm: ""
 }
 
 const placeSlice = createSlice({
@@ -15,6 +17,9 @@ const placeSlice = createSlice({
     reducers: {
         getAllPlaces: (state, action) => {
             state.places = action.payload
+        },
+        setSearchTerm: (state, action) => {
+            state.searchTerm = action.payload
         }
     }
 })

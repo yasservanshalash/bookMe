@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -136,6 +136,10 @@ const PropertyDetails = () => {
 
       </TabContext>
     </Box>
+      </Box>
+      <Divider />
+      <Box sx={{ width: "80vw", margin: "0 auto" }}>
+        <Typography variant="h5" sx={{my: 5, fontWeight: "bold"}}>Reviews</Typography>
       </Box>
     </Box>
   );

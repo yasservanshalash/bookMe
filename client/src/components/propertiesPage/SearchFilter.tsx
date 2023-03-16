@@ -6,12 +6,28 @@ import EditLocationIcon from '@mui/icons-material/EditLocation';
 import PersonIcon from '@mui/icons-material/Person';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import Select from 'react-select'
+import { useDispatch, useSelector } from 'react-redux';
+import { filterActions } from '../../redux/slices/filterSlice';
 
 const SearchFilter = () => {
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().split('T')[0]);
   const [checkOutDate, setCheckOutDate] = useState(new Date().toISOString().split('T')[0]);
+  const [term, setTerm] = useState("");
+  const [numOfGuests, setNumOfGuests] = useState(0);
 
+  // const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
+  // const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
+  // const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
 
+  const dispatch = useDispatch();
+  const searchHandler = () => {
+    dispatch(filterActions.setTerm(term));
+    dispatch(filterActions.setNumOfDays(Number(Number(new Date(checkOutDate)) - Number(new Date(checkInDate)))/ 86400000))
+    dispatch(filterActions.setNumberOfVisitors(numOfGuests))
+    // console.log("term", searchTerm)
+    // console.log("number of days", numOfDays)
+    // console.log("number of guests", numberOfVisitors)
+  }
   /**
    * not needed anymore
    */
@@ -128,9 +144,10 @@ const SearchFilter = () => {
               event.preventDefault();
             }
           }}
+          onChange={(e) => setNumOfGuests(+e.target.value)}
         />
             </Paper>
-            <Button variant="contained" sx={{width: "308px", borderRadius: "20px", mt: 7, p:1}}>Search</Button>
+            <Button variant="contained" sx={{width: "308px", borderRadius: "20px", mt: 7, p:1}} onClick={searchHandler}>Search</Button>
         </Box>
     </Box>
   )
