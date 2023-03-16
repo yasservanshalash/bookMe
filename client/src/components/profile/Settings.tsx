@@ -8,12 +8,13 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LogoutIcon from '@mui/icons-material/Logout';
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Settings = () => {
   return (
     <Box sx={{width: "20%", height: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", backgroundColor: "#E8e8e866", py: 5, textAlign: "center"}}>
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
-      <IconButton sx={{alignSelf: "flex-start", position: "relative", bottom: "20px"}}>
+      <IconButton sx={{alignSelf: "flex-start", position: "relative", bottom: "20px"}} component={Link} to="/properties">
             <ArrowBack />
         </IconButton>
         <Typography variant='h6' sx={{alignSelf: "flex-start"}}>Profile Settings</Typography>

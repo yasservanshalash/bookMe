@@ -5,9 +5,12 @@ import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { userActions } from "../../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const nav = useNavigate();
+  const dispatch = useDispatch();
   type InitialValues = {
     email: string;
     password: string | RegExp;
@@ -44,7 +47,16 @@ const Login = () => {
           .post("http://localhost:8013/users/login", values)
           .then((response) => {
               console.log(response.data)
+              // const token = response.data.token;
+              // const user = JSON.stringify(response.data.user);
+              // localStorage.setItem("token", token);
+              // localStorage.setItem("user", user);
+              // dispatch(userActions.logIn(JSON.parse(user)));
+              localStorage.setItem("token", response.data.token);
+              localStorage.setItem("user", JSON.stringify(response.data.userData));
+              dispatch(userActions.logIn(response.data.userData))
               if(response.data.token) {
+                
                 nav('/')
               }
           });
