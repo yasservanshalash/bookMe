@@ -1,4 +1,3 @@
-// User router here
 import { Router } from "Express";
 import {
   createWishListController,

@@ -33,10 +33,15 @@ const updatePlacesById = async (
   return Place.findByIdAndUpdate(placeId, placeUpdates, { new: true });
 };
 
+const getplaceByID = async (placeId: string): Promise<PlaceDocument | null> => {
+  return Place.findById(placeId);
+};
+
 export default {
   addPlace,
   getPlace,
   getPlaceByName,
   updatePlacesById,
   deletePlacesById,
+  getplaceByID,
 };

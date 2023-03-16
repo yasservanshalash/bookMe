@@ -3,6 +3,7 @@ import {
   updatePlaceController,
   getAllPlacesController,
   createPlaceController,
+  getPlaceById,
 } from "../controllers/place";
 import passport from "passport";
 const router = Router();
@@ -17,5 +18,5 @@ router.put(
   updatePlaceController
 );
 router.get("/", getAllPlacesController);
-
+router.get("/placeId", getPlaceById);
 export default router;
