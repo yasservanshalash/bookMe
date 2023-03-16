@@ -3,27 +3,28 @@ import WishList from "../models/WishList";
 import { WishListDocument } from "../models/WishList";
 import wishListService from "../services/wishList";
 export const createWishListController = async (req: Request, res: Response) => {
+  console.log("hello controller");
   try {
-    const { userId, placeId } = req.body;
-    console.log("user id", userId, "placeid", placeId.toString());
-    /* const checkExist: WishListDocument[] | null =
+    const { userId, places } = req.body;
+
+    const checkExist: WishListDocument[] | null =
       await wishListService.checkWishListAlreadyExistByUserId(
         userId,
-        placeId.toString()
-      ); */
+        places.toString()
+      );
 
     const newList = new WishList({
       userId: userId,
-      places: placeId.toString(),
+      places: places.toString(),
     });
-
-    /*  if (checkExist?.length) {
+    console.log("user id", userId, "placeid", places.toString());
+    if (checkExist?.length) {
       res.json({
         status: "failed",
         message: `You have choose this place already.`,
       });
       return;
-    } */
+    }
     const createList = await wishListService.addToWishList(newList);
     if (createList) {
       res.json({
