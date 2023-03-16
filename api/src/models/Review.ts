@@ -10,8 +10,8 @@ export type ReviewDocument = Document & {
 const ReviewSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: User },
   place: { type: mongoose.Schema.Types.ObjectId, ref: Place },
-  review: { type: String },
-  rating: { type: Number },
+  review: { type: String, default: "good" },
+  rating: { type: Number, default: 3 },
 });
 
 export default mongoose.model<ReviewDocument>("Review", ReviewSchema);

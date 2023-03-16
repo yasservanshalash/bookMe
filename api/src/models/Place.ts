@@ -24,11 +24,11 @@ const PlaceSchema = new mongoose.Schema({
   description: { type: String },
   perks: { type: [String] },
   extraInfo: { type: String },
-  checkIn: { type: Boolean },
-  checkOut: { type: Boolean },
+  checkIn: { type: Boolean, default: false },
+  checkOut: { type: Boolean, default: false },
   maxGuests: { type: Number },
   price: { type: Number },
   place: { type: String },
-  isAvailable: { type: Boolean },
+  isAvailable: { type: Boolean, default: true },
 });
 export default mongoose.model<PlaceDocument>("Place", PlaceSchema);

@@ -12,11 +12,15 @@ export type UserDocument = Document & {
 const UserSchema = new mongoose.Schema({
   name: { type: String },
   password: { type: String },
-  email: { type: String },
-  avatar: { type: String },
-  isAdmin: { type: Boolean },
-  isBanned: { type: Boolean },
-  phoneNumber: { type: String },
+  email: {
+    type: String,
+    unique: [true, "email should be unique"],
+    required: [true, "email is required"],
+  },
+  avatar: { type: String, default: "" },
+  isAdmin: { type: Boolean, default: false },
+  isBanned: { type: Boolean, default: false },
+  phoneNumber: { type: String, default: "+486798945" },
 });
 
 export default mongoose.model<UserDocument>("User", UserSchema);
