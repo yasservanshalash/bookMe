@@ -3,8 +3,8 @@ import React from 'react'
 
 const PersonalDetails = () => {
   return (
-    <Box>
-        <Typography>Personal Details</Typography>
+    <Box sx={{m: 10, display: "flex", flexDirection: "column", gap: 2}}>
+        <Typography variant='h6' sx={{fontWeight: "bold"}}>Personal Details</Typography>
         <Typography>Edit your personal details</Typography>
         <img src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkfNFA-ao6gnYJNGgEAsyNP5mTMCE4PD6dKLEKqsrC&s"} style={{width: "100px", height: "100px", borderRadius: "50%"}} alt="avatar" />
         <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 5 }}>

@@ -25,8 +25,8 @@ const NavBar = () => {
           </Box>
         </Box>
         <Box sx={{display: "flex",alignItems: "flex-end", gap: 5, mr: 5}}>
-          <Button sx={{ border: "1px solid #72777C", borderRadius: "20px", color: "#72777C", width: "100px"}}>Sign up</Button>
-          <Button variant="contained" sx={{borderRadius: "20px", background: "#1D64EC", width: "100px"}}>Log in</Button>
+          <Button sx={{ border: "1px solid #72777C", borderRadius: "20px", color: "#72777C", width: "100px"}} component={Link} to="signup">Sign up</Button>
+          <Button variant="contained" sx={{borderRadius: "20px", background: "#1D64EC", width: "100px"}} component={Link} to="login">Log in</Button>
         </Box>
       </Toolbar>
     </Box>
