@@ -9,6 +9,10 @@ import {
   deleteUserByIdController,
 } from "../controllers/users";
 import passport from "passport";
+
+import { googleAuthenticate } from "../controllers/users";
+
+
 const router = Router();
 router.post("/", createUserController);
 router.post("/login", loginWithPasswordController);
@@ -24,4 +28,13 @@ router.delete(
   //passport.authenticate("jwt", { session: false }),
   deleteUserByIdController
 );
+
+
+router.post(
+  "/login-google",
+  passport.authenticate("google-id-token", { session: false }),
+  googleAuthenticate
+);
+
+
 export default router;
