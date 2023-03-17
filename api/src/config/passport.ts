@@ -39,7 +39,7 @@ export const googleStrategy = new GoogleTokenStrategy(
           email: parsedToken.payload.email
       };
 
-     const user = await UserServices.createOrFindUserByEmail(userPayload);
+     const user = await UserService.createOrFindUserByEmail(userPayload);
       done(null,user);
   }
   

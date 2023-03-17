@@ -18,13 +18,9 @@ app.use(cors());
 app.use("/users", userRouter);
 app.use("/places", placeRouter);
 app.use("/wishlist", wishListRouter);
-<<<<<<< Updated upstream
 app.use("/review", reviewRouter);
-||||||| Stash base
-=======
 
 app.use(passport.initialize());
 passport.use(googleStrategy)
 
->>>>>>> Stashed changes
 export default app;
