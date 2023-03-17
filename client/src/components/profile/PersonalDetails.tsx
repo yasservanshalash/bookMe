@@ -27,7 +27,7 @@ const PersonalDetails = () => {
         <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
             <Typography>Full name</Typography>
             <Typography>{user.name}</Typography>
-            <Typography>Edit</Typography>
+            <Typography onClick={() => console.log("edit")}>Edit</Typography>
         </Box>
         <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
             <Typography>Location</Typography>
