@@ -1,10 +1,27 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
-import PropertyItem from './PropertyItem'
+import { Box, Typography } from "@mui/material";
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import PropertyItem from "./PropertyItem";
 
 const Properties = () => {
+<<<<<<< HEAD
+  const properties = useSelector((state: RootState) => state.places.places);
+  return (
+    <Box
+      sx={{
+        width: "70%",
+        height: "90vh",
+        overflowY: "scroll",
+        margin: "0 auto",
+      }}>
+      <Box>
+        <Typography>140 properties found</Typography>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
+          {properties.map((property) => {
+            return <PropertyItem property={property} />;
+          })}
+=======
   const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
   const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
@@ -22,9 +39,11 @@ const Properties = () => {
           })
         }
         </Box>
+>>>>>>> ea328aa8fe625ea38daffcbeaa6d401faf7abe3b
         </Box>
+      </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Properties
+export default Properties;

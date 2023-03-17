@@ -1,6 +1,7 @@
 import { Request, Response } from "Express";
 import WishList from "../models/WishList";
 import { WishListDocument } from "../models/WishList";
+import wishList from "../services/wishList";
 import wishListService from "../services/wishList";
 export const createWishListController = async (req: Request, res: Response) => {
   console.log("hello controller");
@@ -12,12 +13,12 @@ export const createWishListController = async (req: Request, res: Response) => {
         userId,
         places.toString()
       );
-
+    // console.log("userid", req.body);
     const newList = new WishList({
       userId: userId,
       places: places.toString(),
     });
-    console.log("user id", userId, "placeid", places.toString());
+    console.log("check", checkExist);
     if (checkExist?.length) {
       res.json({
         status: "failed",
@@ -45,6 +46,7 @@ export const getWishListByUserId = async (req: Request, res: Response) => {
     const wishList = await wishListService.getAllWishListByUserId(
       req.params.userId
     );
+    console.log("wishlist", req.params.userId);
     if (!wishList) {
       res.json({ message: `No wish list with id ${req.params.userId}` });
       return;
