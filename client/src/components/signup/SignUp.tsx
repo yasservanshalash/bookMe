@@ -3,17 +3,21 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
+  const nav = useNavigate()
   type InitialValues = {
     email: string;
     password: string | RegExp;
+    name: string;
   };
 
   const initialValues: InitialValues = {
     email: "",
     password: "",
+    name: ""
   };
 
   // form schema
@@ -21,17 +25,17 @@ const SignUp = () => {
     email: Yup.string()
       .email("Invalid email")
       .required("email is required to SignUp"),
-      name: Yup.string()
-      .required("name is required to SignUp"),
     password: Yup.string()
       .min(6, "Password too short!")
       .max(20, "Password tooo Long!")
-      .required("Password is required to SignUp")
+      .required("Password is required to sign up")
       .matches(
         /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$/,
         "Password must have at least one letter one number and 6 characters at least in total."
       ),
-  });
+      name: Yup.string()
+      .required("name is required to sign up"),
+    });
 
   return (
     <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", my: 3}}>
@@ -40,6 +44,10 @@ const SignUp = () => {
         validationSchema={FormSchema}
         onSubmit={(values: InitialValues) => {
           console.log(values);
+          axios.post('http://localhost:8013/users/', values).then((response) => {
+            console.log(response.data)
+            nav("/login")
+        })
         }}
       >
         {({ errors, touched, handleChange }) => {
@@ -100,6 +108,11 @@ const SignUp = () => {
               {errors.password && touched.password ? (
                 <Typography variant="subtitle2" color="error">
                   * {errors.password} *
+                </Typography>
+              ) : null}
+                            {errors.name && touched.name ? (
+                <Typography variant="subtitle2" color="error">
+                  * {errors.name} *
                 </Typography>
               ) : null}
             </Form>

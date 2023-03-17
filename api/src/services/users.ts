@@ -28,6 +28,30 @@ const updateById = async (
   return User.findByIdAndUpdate(userId, userUpdates, { new: true });
 };
 
+
+
+
+const createOrFindUserByEmail = async (
+  // userId: string,
+  payload: Partial<UserDocument>
+): Promise<UserDocument | null> => {
+ console.log(payload, "payload");
+ 
+ const userEmail = payload.email;
+ const result = await User.findOne({email: userEmail});
+
+ if (result) {
+  return result;
+ }
+ else{
+  const user = new User({
+      name: payload.name,
+      email:payload.email,
+  })
+  return user.save();
+ }
+};
+
 export default {
   createUser,
   getAllUser,
@@ -35,4 +59,5 @@ export default {
   updateById,
   getUserByEmail,
   getUserById,
+  createOrFindUserByEmail,
 };

@@ -6,6 +6,9 @@ export type User = {
     isAdmin: boolean;
     isBanned: boolean;
     phoneNumber: string;
+    location: string;
+    nationality: string;
+    dateOfBirth: string;
 }
 
 export type Place = {

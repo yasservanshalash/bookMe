@@ -1,5 +1,5 @@
 import { Box, Divider, IconButton, InputBase, Paper, TextField, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../../navbar/NavBar";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -7,8 +7,14 @@ import DirectionsIcon from '@mui/icons-material/Directions';
 import EditLocationIcon from '@mui/icons-material/EditLocation';
 import headerImg from "../../../unsplash.png";
 import "./LandingHeader.css"
+import { useDispatch } from "react-redux";
+import { filterActions } from "../../../redux/slices/filterSlice";
+import { useNavigate } from "react-router-dom";
 
 const LandingHeader = () => {
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+  const [term, setTerm] = useState("");
   return (
     <Box
     sx={{
@@ -66,10 +72,14 @@ const LandingHeader = () => {
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search properties"
           inputProps={{ "aria-label": "search properties" }}
+          onChange={(e) => setTerm(e.target.value)}
         />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
-        <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+        <IconButton type="button" sx={{ p: "10px" }} aria-label="search" onClick={() => {
+          dispatch(filterActions.setTerm(term))
+          nav("/properties")
+          }}>
           <SearchIcon />
         </IconButton>
               </Paper>

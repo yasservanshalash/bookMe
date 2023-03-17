@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import app from "./app";
 import dotenv from "dotenv";
 
+//import userRouter from './routes/users';
+
+
+
 dotenv.config();
 const port = 8013;
 mongoose.set("strictQuery", false);

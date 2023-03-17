@@ -1,6 +1,11 @@
 //server here
 import Express from "Express";
 import cors from "cors";
+
+
+import  passport  from 'passport';
+import {googleStrategy} from "./config/passport"
+
 //routes
 import userRouter from "./routes/users";
 import placeRouter from "./routes/place";
@@ -15,4 +20,8 @@ app.use("/users", userRouter);
 app.use("/places", placeRouter);
 app.use("/wishlist", wishListRouter);
 app.use("/review", reviewRouter);
+
+app.use(passport.initialize());
+passport.use(googleStrategy)
+
 export default app;

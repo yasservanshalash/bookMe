@@ -6,12 +6,32 @@ import EditLocationIcon from '@mui/icons-material/EditLocation';
 import PersonIcon from '@mui/icons-material/Person';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import Select from 'react-select'
+import { useDispatch, useSelector } from 'react-redux';
+import { filterActions } from '../../redux/slices/filterSlice';
+import { RootState } from '../../redux/store';
 
 const SearchFilter = () => {
   const [checkInDate, setCheckInDate] = useState(new Date().toISOString().split('T')[0]);
   const [checkOutDate, setCheckOutDate] = useState(new Date().toISOString().split('T')[0]);
+  const [term, setTerm] = useState("");
+  const [numOfGuests, setNumOfGuests] = useState(1);
 
+  const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
+  const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
+  const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
 
+  const dispatch = useDispatch();
+  const searchHandler = () => {
+    console.log("term", term)
+    console.log("number of days", Number(Number(new Date(checkOutDate)) - Number(new Date(checkInDate)))/ 86400000);
+    console.log("number of guests", numOfGuests)
+    dispatch(filterActions.setTerm(term));
+    dispatch(filterActions.setNumOfDays(Number(Number(new Date(checkOutDate)) - Number(new Date(checkInDate)))/ 86400000))
+    dispatch(filterActions.setNumberOfVisitors(numOfGuests))
+    console.log("term", searchTerm)
+    console.log("number of days", numberOfDays)
+    console.log("number of guests", numberOfVisitors)
+  }
   /**
    * not needed anymore
    */
@@ -52,6 +72,7 @@ const SearchFilter = () => {
           sx={{ ml: 1, flex: 2 }}
           placeholder="Search properties"
           inputProps={{ "aria-label": "search properties" }}
+          onChange={(e) => setTerm(e.target.value)}
         />
             </Paper>
             <Paper
@@ -128,9 +149,10 @@ const SearchFilter = () => {
               event.preventDefault();
             }
           }}
+          onChange={(e) => setNumOfGuests(+e.target.value)}
         />
             </Paper>
-            <Button variant="contained" sx={{width: "308px", borderRadius: "20px", mt: 7, p:1}}>Search</Button>
+            <Button variant="contained" sx={{width: "308px", borderRadius: "20px", mt: 7, p:1}} onClick={searchHandler}>Search</Button>
         </Box>
     </Box>
   )

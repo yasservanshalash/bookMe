@@ -1,7 +1,7 @@
 import { Request, Response } from "Express";
 import bcrypt from "bcrypt";
 
-import User from "../models/User";
+import User, { UserDocument }  from "../models/User";
 import UserServices from "../services/users";
 import generateToken from "../util/generateToken";
 
@@ -122,5 +122,30 @@ export const deleteUserByIdController = async (req: Request, res: Response) => {
     res.json(userDataAfter);
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const googleAuthenticate = async (req: Request, res: Response) => {
+  try {
+      console.log(req, "request");
+      const userData = req.user as UserDocument;
+      if (!userData) {
+          res.json({ message: "Cant find user with the email" })
+          return; //see 43:00 in googlelogin 1 video
+      }
+      // const token = jwt.sign(
+      // {
+      //     name: userData.name,
+      //     email: request.body.email,
+      // },
+      // JWT_SECRET,
+      // {
+      //     expiresIn: "1h",
+      // }
+      // );
+      // res.json({token, userData});
+      res.json({ userData });
+  } catch (error) {
+      console.log(error);
   }
 };

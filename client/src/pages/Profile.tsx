@@ -5,7 +5,7 @@ import Settings from '../components/profile/Settings'
 
 const Profile = () => {
   return (
-    <Box sx={{display: "flex", alignItems: "center"}}>
+    <Box sx={{display: "flex"}}>
         <Settings />
         <PersonalDetails />
     </Box>
