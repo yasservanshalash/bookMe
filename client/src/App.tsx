@@ -14,6 +14,8 @@ import PropertyDetails from './pages/PropertyDetails';
 import Login from './components/login/Login';
 import SignUp from './components/signup/SignUp';
 import Profile from './pages/Profile';
+import FavoritesPage from './pages/FavoritesPage';
+import GoogleLogIn from './components/GoogleLogIn';
 function App() {
   const places = useSelector((state: RootState) => state.places.places)
   const dispatchThunk = useDispatch<AppDispatch>();
@@ -32,6 +34,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path='/googleLogin' element={<GoogleLogIn />} />
         </Routes>
       <Footer />
     </Box>

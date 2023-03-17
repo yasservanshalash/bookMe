@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { userActions } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
+import GoogleLogIn from "../GoogleLogIn";
 
 const Login = () => {
   const nav = useNavigate();
@@ -71,7 +72,10 @@ const Login = () => {
                     <CloseIcon sx={{transform: "scale(0.75)"}}/>
                 </IconButton> */}
                 <Typography sx={{fontWeight: "bold"}}>Login</Typography>
-                <Button variant="contained">Log in with Google</Button>
+                <Box sx={{display: "flex", justifyContent: "center"}}>
+                <GoogleLogIn />
+
+                </Box>
                 <Divider />
                 <Box sx={{ display: "flex", flexDirection: "column", gap:1.5 }}>
                   <Typography variant="subtitle2" sx={{fontWeight: "bold"}}>Email</Typography>

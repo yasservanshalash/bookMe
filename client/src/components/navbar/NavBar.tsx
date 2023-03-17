@@ -51,7 +51,7 @@ const NavBar = () => {
         </Box>
         <Box sx={{display: user._id ? "flex" : "none",alignItems: "center", gap: 5, mr: 5}}>
           {/* <img src={user.avatar} alt="avatar" style={{width: "50px", borderRadius: "50%"}}/> */}
-          <Typography>Favorites</Typography>
+          <Typography component={Link} to="/favorites">Favorites</Typography>
           <IconButton         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"

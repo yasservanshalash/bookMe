@@ -5,6 +5,7 @@ import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import GoogleLogIn from "../GoogleLogIn";
 
 const SignUp = () => {
   const nav = useNavigate()
@@ -58,8 +59,10 @@ const SignUp = () => {
                     <CloseIcon sx={{transform: "scale(0.75)"}}/>
                 </IconButton> */}
                 <Typography sx={{fontWeight: "bold"}}>Sign up</Typography>
-                <Button variant="contained">Sign up with Google</Button>
-                <Divider />
+                <Box sx={{display: "flex", justifyContent: "center"}}>
+                <GoogleLogIn />
+
+                </Box>                <Divider />
                 <Box sx={{ display: "flex", flexDirection: "column", gap:1.5 }}>
                   <Typography variant="subtitle2" sx={{fontWeight: "bold"}}>Name</Typography>
                   <input
