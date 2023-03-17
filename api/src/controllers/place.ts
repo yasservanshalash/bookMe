@@ -37,7 +37,6 @@ export const createPlaceController = async (req: Request, res: Response) => {
       isAvailable: isAvailable,
     });
     //logic for add places for admin
-    //let placeStore;
     const isLoginAdmin = await UserService.getUserById(owner);
     console.log(isLoginAdmin);
     if (
