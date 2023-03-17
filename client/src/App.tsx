@@ -35,7 +35,6 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path='/googleLogin' element={<GoogleLogIn />} />
         </Routes>
       <Footer />
     </Box>

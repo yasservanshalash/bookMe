@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const Settings = () => {
   return (
-    <Box sx={{width: "20%", height: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", backgroundColor: "#E8e8e866", py: 5, textAlign: "center"}}>
+    <Box sx={{width: "20%", height: "62vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", backgroundColor: "#E8e8e866", py: 5, textAlign: "center"}}>
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
       <IconButton sx={{alignSelf: "flex-start", position: "relative", bottom: "20px"}} component={Link} to="/properties">
             <ArrowBack />

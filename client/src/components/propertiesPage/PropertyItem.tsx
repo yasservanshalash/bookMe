@@ -7,6 +7,9 @@ import { RootState } from "../../redux/store";
 import { Place } from "../../types/types";
 
 const PropertyItem = ({ property }: { property: Place }) => {
+  const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
+  const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
+  const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
   return (
     <Paper sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box sx={{ display: "flex", textAlign: "left" }}>
@@ -84,8 +87,8 @@ const PropertyItem = ({ property }: { property: Place }) => {
             }}>
             <Typography
               variant="h6"
-              sx={{ fontWeight: "bold" }}>{`$${property.price}`}</Typography>
-            <Typography>3 nights, 2 guests</Typography>
+              sx={{ fontWeight: "bold" }}>{`$${numberOfDays > 1 ? property.price * numberOfDays : property.price}`}</Typography>
+            <Typography>{`${numberOfDays > 1 ? numberOfDays + " nights" : "1 night"}, ${numberOfVisitors > 1 ? numberOfVisitors + " guests": "1 guest"} `}</Typography>
             <Link
               to={`/properties/${property._id}`}
               style={{ textDecoration: "none" }}>
