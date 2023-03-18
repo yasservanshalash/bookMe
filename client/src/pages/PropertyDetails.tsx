@@ -11,33 +11,40 @@ import { RootState } from "../redux/store";
 import { Place } from "../types/types";
 import { Star } from "@mui/icons-material";
 import { filterActions } from '../redux/slices/filterSlice';
+import { reservationActions } from "../redux/slices/reservationSlice";
 
 const PropertyDetails = () => {
   const { id } = useParams();
   const place = useSelector((state: RootState) => state.places.places).find(
     (place) => String(place._id) === String(id)
   ) as Place;
-
-  const [total, setTotal] = useState(place?.price);
+  const checkin = useSelector((state: RootState) => state.reservations.checkIn)
+  const checkout = useSelector((state: RootState) => state.reservations.checkOut)
+  const total = useSelector((state: RootState) => state.reservations.total)
+  // const [total, setTotal] = useState(place?.price);
   const [value, setValue] = React.useState("1");
-  const [checkin, setCheckIn] =   useState(new Date().toISOString().split('T')[0]);
-  const [checkout, setCheckOut] =   useState(new Date().toISOString().split('T')[0]);
+  // const [checkin, setCheckIn] =   useState(new Date().toISOString().split('T')[0]);
+  // const [checkout, setCheckOut] =   useState(new Date().toISOString().split('T')[0]);
   const [numOfDays, setNumOfDays]  = useState(1); 
-  const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
+  // const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const dispatch = useDispatch();
 
   const checkInHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckIn(e.target.value);
-    dispatch(filterActions.setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000))
-    console.log(numOfDays)
-    setTotal(numberOfDays * place?.price)
+    const checkIn = e.target.value
+    dispatch(reservationActions.setCheckin(checkIn))
+    console.log(checkin)
+    setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
+    dispatch(reservationActions.setTotal(numOfDays * place.price))
+    console.log(total)
   }
 
   const checkOutHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckOut(e.target.value);
-
-    dispatch(filterActions.setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000))
-    setTotal(numberOfDays * place?.price)
+    const checkOut = e.target.value
+    dispatch(reservationActions.setCheckout(checkOut))
+    console.log(checkout)
+    setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
+    dispatch(reservationActions.setTotal(numOfDays * place.price))
+    console.log(total)
 
   }
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -200,9 +207,10 @@ const PropertyDetails = () => {
 
         </Box>
         </Box>
-        <Typography sx={{alignSelf: "flex-end", my:4}}>{`Total: $${numberOfDays > 1 ? total : place?.price }`}</Typography>
+        <Typography sx={{alignSelf: "flex-end", my:4}}>{`Total: $${numOfDays > 1 ? total : place?.price }`}</Typography>
         <Box sx={{justifySelf: "flex-end"}}>
           <Button variant="contained" sx={{width: "100%"}} disabled={checkin === null || checkout === null ? true : false} onClick={() => {
+            console.log(numOfDays * place.price)
           }}>Reserve</Button>
         </Box>
       </Paper>
