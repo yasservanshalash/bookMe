@@ -18,24 +18,26 @@ const PropertyDetails = () => {
     (place) => String(place._id) === String(id)
   ) as Place;
 
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(place?.price);
   const [value, setValue] = React.useState("1");
-  const [checkin, setCheckIn] =  useState(new Date().toISOString().split('T')[0]);
-  const [checkout, setCheckOut] =  useState(new Date().toISOString().split('T')[0]);
+  const [checkin, setCheckIn] =   useState(new Date().toISOString().split('T')[0]);
+  const [checkout, setCheckOut] =   useState(new Date().toISOString().split('T')[0]);
   const [numOfDays, setNumOfDays]  = useState(1); 
-
+  const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const dispatch = useDispatch();
 
-  const checkInHandler = (e: any) => {
-    console.log(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
-    setTotal(numOfDays * place.price);
-    console.log(total)
+  const checkInHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckIn(e.target.value);
+    dispatch(filterActions.setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000))
+    console.log(numOfDays)
+    setTotal(numberOfDays * place?.price)
   }
 
-  const checkOutHandler = (e: any) => {
-    console.log(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
-    setTotal(numOfDays * place.price);
-    console.log(total)
+  const checkOutHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckOut(e.target.value);
+
+    dispatch(filterActions.setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000))
+    setTotal(numberOfDays * place?.price)
 
   }
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -198,9 +200,10 @@ const PropertyDetails = () => {
 
         </Box>
         </Box>
-        <Typography sx={{alignSelf: "flex-end", my:4}}>{`$${numOfDays > 1 ? total : place?.price }`}</Typography>
+        <Typography sx={{alignSelf: "flex-end", my:4}}>{`Total: $${numberOfDays > 1 ? total : place?.price }`}</Typography>
         <Box sx={{justifySelf: "flex-end"}}>
-          <Button variant="contained" sx={{width: "100%"}} disabled={checkin === null || checkout === null ? true : false}>Reserve</Button>
+          <Button variant="contained" sx={{width: "100%"}} disabled={checkin === null || checkout === null ? true : false} onClick={() => {
+          }}>Reserve</Button>
         </Box>
       </Paper>
       </Box>

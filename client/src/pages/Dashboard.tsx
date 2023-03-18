@@ -172,7 +172,7 @@ const Dashboard = () => {
             //   place: place
             // })
             dispatchThunk(addPlaceThunk({
-              owner: "Yasser",
+              owner: user._id,
               title: title,
 address: address,
 descriptions: descriptions,

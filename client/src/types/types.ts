@@ -28,3 +28,13 @@ export type Place = {
   isAvailable: boolean;
 }
 
+export type Reservation = {
+  place: Place;
+  user: User;
+  checkIn?: Date;
+  checkOut?: Date;
+  phone: string;
+  price: number;
+  
+
+}
