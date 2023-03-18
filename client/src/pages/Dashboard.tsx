@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { placeActions } from "../redux/slices/placesSlice";
 import { AppDispatch, RootState } from "../redux/store";
 import { addPlaceThunk } from "../redux/thunk/placesThunk";
-
+import UserList from "../components/user/UserList";
 const Dashboard = () => {
   const [value, setValue] = React.useState("1");
-  const user = useSelector((state: RootState) => state.users.user)
+
   const dispatchThunk = useDispatch<AppDispatch>();
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [descriptions, setDescriptions] = useState("");
@@ -33,8 +34,7 @@ const Dashboard = () => {
         typography: "body1",
         height: "66vh",
         margin: "0 auto",
-      }}
-    >
+      }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -43,7 +43,12 @@ const Dashboard = () => {
             <Tab label="Add places" value="3" />
           </TabList>
         </Box>
-        <TabPanel value="1">User Table</TabPanel>
+        <TabPanel value="1">
+          User Table
+          <Box>
+            <UserList></UserList>
+          </Box>
+        </TabPanel>
         <TabPanel value="2">Reservation Table</TabPanel>
         <TabPanel value="3">
           <Typography variant="h6">New Place</Typography>
@@ -53,8 +58,7 @@ const Dashboard = () => {
               gridTemplateColumns: "1fr 1fr 1fr 1fr",
               gap: 2,
               my: 5,
-            }}
-          >
+            }}>
             <TextField
               required
               variant="standard"
@@ -159,35 +163,38 @@ const Dashboard = () => {
               placeholder="place"
               onChange={(e) => setPlace(e.target.value)}
             />
-            <Button variant="contained" onClick={() => 
-            //   console.log({
-            //   title: title,
-            //   address: address,
-            //   descriptions: descriptions,
-            //   photos: [photo1, photo2, photo3, photo4, photo5],
-            //   perks: perks.split(" "),
-            //   extraInfo: extraInfo,
-            //   maxGuests: maxGuests,
-            //   price: price,
-            //   place: place
-            // })
-            dispatchThunk(addPlaceThunk({
-              owner: user._id,
-              title: title,
-address: address,
-descriptions: descriptions,
-photos: [photo1, photo2, photo3, photo4, photo5],
-perks: perks.split(" "),
-extraInfo: extraInfo,
-maxGuests: maxGuests,
-price: price,
-place: place,
-isAvailable: true,
-checkIn: false,
-checkOut: false,
-
-            }))
-            }>
+            <Button
+              variant="contained"
+              onClick={() =>
+                //   console.log({
+                //   title: title,
+                //   address: address,
+                //   descriptions: descriptions,
+                //   photos: [photo1, photo2, photo3, photo4, photo5],
+                //   perks: perks.split(" "),
+                //   extraInfo: extraInfo,
+                //   maxGuests: maxGuests,
+                //   price: price,
+                //   place: place
+                // })
+                dispatchThunk(
+                  addPlaceThunk({
+                    owner: "",
+                    title: title,
+                    address: address,
+                    descriptions: descriptions,
+                    photos: [photo1, photo2, photo3, photo4, photo5],
+                    perks: perks.split(" "),
+                    extraInfo: extraInfo,
+                    maxGuests: maxGuests,
+                    price: price,
+                    place: place,
+                    isAvailable: true,
+                    checkIn: false,
+                    checkOut: false,
+                  })
+                )
+              }>
               Add Place
             </Button>
           </Box>
@@ -198,6 +205,3 @@ checkOut: false,
 };
 
 export default Dashboard;
-
-
-  
