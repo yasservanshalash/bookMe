@@ -14,38 +14,41 @@ import { filterActions } from '../redux/slices/filterSlice';
 import { reservationActions } from "../redux/slices/reservationSlice";
 
 const PropertyDetails = () => {
+
   const { id } = useParams();
   const place = useSelector((state: RootState) => state.places.places).find(
     (place) => String(place._id) === String(id)
   ) as Place;
-  const checkin = useSelector((state: RootState) => state.reservations.checkIn)
-  const checkout = useSelector((state: RootState) => state.reservations.checkOut)
-  const total = useSelector((state: RootState) => state.reservations.total)
-  // const [total, setTotal] = useState(place?.price);
+  const checkIn = useSelector((state: RootState) => state.reservations.checkIn)
+  // const checkout = useSelector((state: RootState) => state.reservations.checkOut)
+  // const total = useSelector((state: RootState) => state.reservations.total)
+  const [total, setTotal] = useState(place?.price);
   const [value, setValue] = React.useState("1");
-  // const [checkin, setCheckIn] =   useState(new Date().toISOString().split('T')[0]);
-  // const [checkout, setCheckOut] =   useState(new Date().toISOString().split('T')[0]);
+  const [checkin, setCheckIn] =   useState(new Date().toDateString());
+  const [checkout, setCheckOut] =   useState(new Date().toDateString());
   const [numOfDays, setNumOfDays]  = useState(1); 
   // const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const dispatch = useDispatch();
 
+
   const checkInHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checkIn = e.target.value
-    dispatch(reservationActions.setCheckin(checkIn))
+    const value = e.target.value;
+    setCheckIn(new Date(value).toDateString());
     console.log(checkin)
-    setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
-    dispatch(reservationActions.setTotal(numOfDays * place.price))
-    console.log(total)
+    console.log(Math.abs((+new Date(checkin) - +new Date(checkout) )/ 86400000))
+    setNumOfDays(Math.ceil(Math.abs(Number(Number(new Date(checkout)) - Number(new Date(checkin)) )/ 86400000)))
+    // console.log(value)
+    // dispatch(reservationActions.setCheckin(value));
+    // console.log(checkin)
+    // console.log(checkIn)
   }
 
   const checkOutHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checkOut = e.target.value
-    dispatch(reservationActions.setCheckout(checkOut))
+    const value = e.target.value;
+    setCheckOut(new Date(value).toDateString());
     console.log(checkout)
-    setNumOfDays(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
-    dispatch(reservationActions.setTotal(numOfDays * place.price))
-    console.log(total)
-
+    console.log(Math.abs(Number(Number(new Date(checkin)) - Number(new Date(checkout)) )/ 86400000))
+    setNumOfDays(Math.ceil(Math.abs(Number(Number(new Date(checkout)) - Number(new Date(checkin)) )/ 86400000)))
   }
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -197,20 +200,20 @@ const PropertyDetails = () => {
         <Box sx={{display: "flex", justifyContent: "space-evenly", my:2}}>
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: 4}}>
           <Typography sx={{fontWeight: "bold"}}>Check In</Typography>
-          <input type="date" name="checkin" id="checkin" style={{width: "17px", transform: "scale(3)", border: "0px", outline: "0px"}} onChange={checkInHandler}/>
-          <Typography>{checkin.toString().split('T')[0]}</Typography>
+          <input value={checkin} type="date" name="checkin" id="checkin" style={{width: "17px", transform: "scale(3)", border: "0px", outline: "0px"}} onChange={checkInHandler}/>
+          <Typography>{checkin}</Typography>
         </Box>
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: 4}}>
           <Typography sx={{fontWeight: "bold"}}>Check Out</Typography>
-          <input type="date" name="checkout" id="checkout" style={{width: "17px", transform: "scale(3)", border: "0px", outline: "0px"}} onChange={checkOutHandler}/>
-          <Typography>{checkout.toString().split('T')[0]}</Typography>
+          <input value={checkout} type="date" name="checkout" id="checkout" style={{width: "17px", transform: "scale(3)", border: "0px", outline: "0px"}} onChange={checkOutHandler}/>
+          <Typography>{checkout}</Typography>
 
         </Box>
         </Box>
-        <Typography sx={{alignSelf: "flex-end", my:4}}>{`Total: $${numOfDays > 1 ? total : place?.price }`}</Typography>
+        <Typography sx={{alignSelf: "flex-end", my:4}}>{`Total: $${numOfDays <= 1 ? place?.price : numOfDays * place?.price }`}</Typography>
         <Box sx={{justifySelf: "flex-end"}}>
           <Button variant="contained" sx={{width: "100%"}} disabled={checkin === null || checkout === null ? true : false} onClick={() => {
-            console.log(numOfDays * place.price)
+            console.log((+new Date(checkin) - +new Date(checkout) )/ 86400000)
           }}>Reserve</Button>
         </Box>
       </Paper>
