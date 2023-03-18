@@ -62,3 +62,20 @@ export function getUserList() {
     dispatch(userActions.getCompleteUserList(result.data));
   };
 }
+
+export function editIsAdmin(user: User, isAdmin: boolean) {
+  return async (dispatch: AppDispatch) => {
+    const result = await axios.put("http://localhost:8013/users/" + user._id, {
+      isAdmin: isAdmin,
+    });
+    dispatch(userActions.changeAvatar(result.data));
+  };
+}
+export function editIsBanned(user: User, isBanned: boolean) {
+  return async (dispatch: AppDispatch) => {
+    const result = await axios.put("http://localhost:8013/users/" + user._id, {
+      isBanned: isBanned,
+    });
+    dispatch(userActions.changeAvatar(result.data));
+  };
+}

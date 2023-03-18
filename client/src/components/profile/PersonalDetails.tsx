@@ -174,9 +174,9 @@ const PersonalDetails = () => {
               <CloseIcon sx={{ color: "coral" }} />
             </IconButton>
           </Box>
-          <Box sx={{ display: !nameEdit ? "flex" : "none" }}>
+          {/*    <Box sx={{ display: !nameEdit ? "flex" : "none" }}>
             <Typography>{user?.name}</Typography>
-          </Box>
+          </Box> */}
           <Box sx={{ display: !nameEdit ? "flex" : "none" }}>
             <Button onClick={() => setNameEdit(true)}>Edit</Button>
           </Box>

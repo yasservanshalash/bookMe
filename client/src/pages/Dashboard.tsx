@@ -44,7 +44,6 @@ const Dashboard = () => {
           </TabList>
         </Box>
         <TabPanel value="1">
-          User Table
           <Box>
             <UserList></UserList>
           </Box>

@@ -27,14 +27,14 @@ export default function UserList() {
 
   return (
     <Fragment>
-      <TableContainer>
+      <TableContainer sx={{ height: "50vh" }}>
         <Table>
           <TableHead
             className="table-header-row"
-            style={{ height: "30", color: "red" }}>
+            style={{ height: "30px", color: "red" }}>
             <TableRow
               className="table-header-row"
-              style={{ height: "30", color: "blue" }}>
+              style={{ height: "30 ", color: "blue" }}>
               <TableCell sx={{ Width: 50 }}>
                 <b>Name</b>
               </TableCell>
@@ -49,9 +49,6 @@ export default function UserList() {
               </TableCell>{" "}
               <TableCell sx={{ Width: 50 }}>
                 <b>Is Banned</b>
-              </TableCell>
-              <TableCell>
-                <b>Edit</b>
               </TableCell>
             </TableRow>
           </TableHead>
