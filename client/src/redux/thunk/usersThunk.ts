@@ -7,19 +7,19 @@ export function editNameThunk(user: User, name: string) {
   return async (dispatch: AppDispatch) => {
     console.log("result is", user._id, name);
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      name: name,
+      "name": name,
     });
 
-    dispatch(userActions.changeName(result.data));
+    dispatch(userActions.changeName(result.data.name));
   };
 }
 
 export function editAvatar(user: User, avatar: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      avatar: avatar,
+      "avatar": avatar,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeAvatar(result.data.avatar));
   };
 }
 export function editPhoneNumberThunk(user: User, phoneNumber: string) {
@@ -27,31 +27,31 @@ export function editPhoneNumberThunk(user: User, phoneNumber: string) {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
       phoneNumber: phoneNumber,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changePhoneNumber(result.data.phoneNumber));
   };
 }
 export function editLocation(user: User, location: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      location: location,
+      "place": location,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeLocation(result.data.place));
   };
 }
 export function editNationality(user: User, nationality: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      nationality: nationality,
+      "nationality": nationality,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeNationality(result.data.nationality));
   };
 }
 export function editEmail(user: User, email: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      avatar: email,
+      "avatar": email,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeEmail(result.data));
   };
 }
 

@@ -67,9 +67,10 @@ const PersonalDetails = () => {
             <IconButton
               sx={{ "&:hover": { background: "transparent" } }}
               onClick={() => {
-                setAvatarEdit(false);
                 dispatchThunk(editAvatar(user, avatar));
                 dispatch(userActions.changeAvatar(avatar));
+                setAvatarEdit(false);
+
                 console.log("Avatar changed");
               }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
@@ -94,49 +95,7 @@ const PersonalDetails = () => {
           <CameraAlt />
         </IconButton>
       </Box>
-      {/* <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", alignItems: "center", gap:10}}>
-            <Box>
-            <Typography>Full name</Typography>
 
-            </Box>
-            <Box sx={{display: nameEdit ? "flex" : "none", gap: 10, alignItems: "center"}}>
-            <InputBase sx={{flex: 1}} sx={{border: "0px", outline: "0px"}} placeholder="Enter new name"/>
-            <Box sx={{display: "flex"}}>
-            <IconButton onClick={() => setNameEdit(false)}>
-                <DoneIcon sx={{color: 'lightgreen'}}/>
-            </IconButton>
-            <IconButton onClick={() => setNameEdit(false)}>
-                <CloseIcon  sx={{color: "red"}}/>
-            </IconButton>
-            </Box>
-
-            </Box>
-            <Box sx={{display: !nameEdit ? "grid" : "none", gridTemplateColumns: "1fr 1fr", gap: 10}}>
-            <Typography>{user.name}</Typography>
-            <Typography onClick={() => setNameEdit(true)}>Edit</Typography>
-            </Box>
-        </Box>
-        <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-            <Typography>Location</Typography>
-            <Typography>{ user.location ? user.location : `‎ ` }</Typography>
-            <Typography>Edit</Typography>
-        </Box>
-        <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-            <Typography>Email</Typography>
-            <Typography>{user.email}</Typography>
-            <Typography>Edit</Typography>
-        </Box>
-        <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-            <Typography>Nationality</Typography>
-            <Typography>{ user.location ? user.location : `‎ `}</Typography>
-            <Typography>Edit</Typography>
-        </Box>
-        <Box sx={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-            <Typography>Date of birth</Typography>
-            <Typography>{ user.dateOfBirth ? user.dateOfBirth : `‎ `}</Typography>
-            <Typography>Edit</Typography>
-        </Box> */}
-      {/*welcome */}
       <Box
         sx={{
           display: "grid",
@@ -163,10 +122,10 @@ const PersonalDetails = () => {
           <Box sx={{ display: nameEdit ? "flex" : "none", gap: 5 }}>
             <IconButton
               onClick={() => {
-                setNameEdit(false);
                 dispatchThunk(editNameThunk(user, name));
                 dispatch(userActions.changeName(name));
-                console.log("name changed compomnent", user, name);
+                setNameEdit(false);
+                console.log(user.name, "username")
               }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
@@ -175,7 +134,7 @@ const PersonalDetails = () => {
             </IconButton>
           </Box>
           <Box sx={{ display: !nameEdit ? "flex" : "none" }}>
-            <Typography>{user?.name}</Typography>
+            <Typography>{`${user?.name}`}</Typography>
           </Box>
           <Box sx={{ display: !nameEdit ? "flex" : "none" }}>
             <Button onClick={() => setNameEdit(true)}>Edit</Button>
@@ -215,7 +174,7 @@ const PersonalDetails = () => {
             </IconButton>
           </Box>
           <Box sx={{ display: !phoneNumberEdit ? "flex" : "none" }}>
-            <Typography>{user.phoneNumber}</Typography>
+            <Typography>{user?.phoneNumber}</Typography>
           </Box>
           <Box sx={{ display: !phoneNumberEdit ? "flex" : "none" }}>
             <Button onClick={() => setPhoneNumberEdit(true)}>Edit</Button>
@@ -253,7 +212,7 @@ const PersonalDetails = () => {
             </IconButton>
           </Box>
           <Box sx={{ display: !locationEdit ? "flex" : "none" }}>
-            <Typography>{user.location}</Typography>
+            <Typography>{user?.location}</Typography>
           </Box>
           <Box sx={{ display: !locationEdit ? "flex" : "none" }}>
             <Button onClick={() => setLocationEdit(true)}>Edit</Button>
@@ -291,7 +250,7 @@ const PersonalDetails = () => {
             </IconButton>
           </Box>
           <Box sx={{ display: !nationalityEdit ? "flex" : "none" }}>
-            <Typography>{user.nationality}</Typography>
+            <Typography>{user?.nationality}</Typography>
           </Box>
           <Box sx={{ display: !nationalityEdit ? "flex" : "none" }}>
             <Button onClick={() => setNationalityEdit(true)}>Edit</Button>
@@ -329,7 +288,7 @@ const PersonalDetails = () => {
             </IconButton>
           </Box>
           <Box sx={{ display: !emailEdit ? "flex" : "none" }}>
-            <Typography>{user.email}</Typography>
+            <Typography>{user?.email}</Typography>
           </Box>
           <Box sx={{ display: !emailEdit ? "flex" : "none" }}>
             <Button onClick={() => setEmailEdit(true)}>Edit</Button>
