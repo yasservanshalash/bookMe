@@ -12,8 +12,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { lightGreen } from "@mui/material/colors";
+import { userActions } from "../../redux/slices/userSlice";
+import {
+  editAvatar,
+  editEmail,
+  editLocation,
+  editNameThunk,
+  editNationality,
+  editPhoneNumberThunk,
+} from "../../redux/thunk/usersThunk";
 
 const PersonalDetails = () => {
   const [nameEdit, setNameEdit] = useState(false);
@@ -22,9 +31,17 @@ const PersonalDetails = () => {
   const [emailEdit, setEmailEdit] = useState(false);
   const [locationEdit, setLocationEdit] = useState(false);
   const [avatarEdit, setAvatarEdit] = useState(false);
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [nationality, setNationality] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [avatar, setAvatar] = useState("");
   const nav = useNavigate();
   const user = useSelector((state: RootState) => state.users.user);
 
+  const dispatch = useDispatch();
+  const dispatchThunk = useDispatch<AppDispatch>();
   if (user._id === "") {
     nav("/");
   }
@@ -44,12 +61,24 @@ const PersonalDetails = () => {
           <InputBase
             placeholder="Enter avatar link"
             sx={{ display: avatarEdit ? "flex" : "none" }}
+            onChange={(e) => setAvatar(e.target.value)}
           />
           <Box sx={{ display: avatarEdit ? "flex" : "none" }}>
-            <IconButton onClick={() => setAvatarEdit(false)} sx={{"&:hover": {background: "transparent"}}}>
+            <IconButton
+              sx={{ "&:hover": { background: "transparent" } }}
+              onClick={() => {
+                setAvatarEdit(false);
+                dispatchThunk(editAvatar(user, avatar));
+                dispatch(userActions.changeAvatar(avatar));
+                console.log("Avatar changed");
+              }}
+            >
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
-            <IconButton onClick={() => setAvatarEdit(false)} sx={{"&:hover": {background: "transparent"}}}>
+            <IconButton
+              onClick={() => setAvatarEdit(false)}
+              sx={{ "&:hover": { background: "transparent" } }}
+            >
               <CloseIcon sx={{ color: "coral" }} />
             </IconButton>
           </Box>
@@ -129,10 +158,21 @@ const PersonalDetails = () => {
             <Typography>Name:</Typography>
           </Box>
           <Box sx={{ display: nameEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new name" />
+            <InputBase
+              sx={{ flex: 1 }}
+              placeholder="enter new name"
+              onChange={(e) => setName(e.target.value)}
+            />
           </Box>
           <Box sx={{ display: nameEdit ? "flex" : "none", gap: 5 }}>
-            <IconButton onClick={() => setNameEdit(false)}>
+            <IconButton
+              onClick={() => {
+                setNameEdit(false);
+                dispatchThunk(editNameThunk(user, name));
+                dispatch(userActions.changeName(name));
+                console.log("name changed");
+              }}
+            >
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setNameEdit(false)}>
@@ -158,10 +198,23 @@ const PersonalDetails = () => {
             <Typography>phone number:</Typography>
           </Box>
           <Box sx={{ display: phoneNumberEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new phone number" />
+            <InputBase
+              sx={{ flex: 1 }}
+              placeholder="enter new phone number"
+              onChange={(e) => {
+                setPhoneNumber(e.target.value);
+              }}
+            />
           </Box>
           <Box sx={{ display: phoneNumberEdit ? "flex" : "none", gap: 5 }}>
-            <IconButton onClick={() => setPhoneNumberEdit(false)}>
+            <IconButton
+              onClick={() => {
+                setPhoneNumberEdit(false);
+                dispatchThunk(editPhoneNumberThunk(user, phoneNumber));
+                dispatch(userActions.changePhoneNumber(phoneNumber));
+                console.log("phone number changed");
+              }}
+            >
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setPhoneNumberEdit(false)}>
@@ -187,10 +240,17 @@ const PersonalDetails = () => {
             <Typography>location:</Typography>
           </Box>
           <Box sx={{ display: locationEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new location" />
+            <InputBase sx={{ flex: 1 }} placeholder="enter new location" onChange={(e) => setLocation(e.target.value)}/>
           </Box>
           <Box sx={{ display: locationEdit ? "flex" : "none", gap: 5 }}>
-            <IconButton onClick={() => setLocationEdit(false)}>
+            <IconButton
+              onClick={() => {
+                setLocationEdit(false);
+                dispatchThunk(editLocation(user, location));
+                dispatch(userActions.changeLocation(location));
+                console.log("location changed");
+              }}
+            >
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setLocationEdit(false)}>
@@ -216,10 +276,17 @@ const PersonalDetails = () => {
             <Typography>Nationality:</Typography>
           </Box>
           <Box sx={{ display: nationalityEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new nationality" />
+            <InputBase sx={{ flex: 1 }} placeholder="enter new nationality" onChange={(e) => setNationality(e.target.value)} />
           </Box>
           <Box sx={{ display: nationalityEdit ? "flex" : "none", gap: 5 }}>
-            <IconButton onClick={() => setNationalityEdit(false)}>
+            <IconButton
+              onClick={() => {
+                setNationalityEdit(false);
+                dispatchThunk(editNationality(user, nationality));
+                dispatch(userActions.changeNationality(nationality));
+                console.log("nationality changed");
+              }}
+            >
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setNationalityEdit(false)}>
@@ -245,10 +312,17 @@ const PersonalDetails = () => {
             <Typography>Email:</Typography>
           </Box>
           <Box sx={{ display: emailEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new email" />
+            <InputBase sx={{ flex: 1 }} placeholder="enter new email" onChange={(e) => setEmail(e.target.value)}/>
           </Box>
           <Box sx={{ display: emailEdit ? "flex" : "none", gap: 5 }}>
-            <IconButton onClick={() => setEmailEdit(false)}>
+            <IconButton
+              onClick={() => {
+                setEmailEdit(false);
+                dispatchThunk(editEmail(user, email));
+                dispatch(userActions.changeEmail(email));
+                console.log("email changed");
+              }}
+            >
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setEmailEdit(false)}>

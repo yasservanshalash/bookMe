@@ -48,6 +48,23 @@ const userSlice = createSlice({
             state.user.location = "";
             state.user.nationality = "";
             state.user.dateOfBirth = "";
+        },
+        changeName: (state, action) => {
+            state.user.name = action.payload
+        },
+        changeAvatar: (state, action) => {
+            state.user.avatar = action.payload
+        },
+        changePhoneNumber: (state, action) => {
+            state.user.phoneNumber = action.payload
+        },
+        changeLocation: (state, action) => {
+            state.user.location = action.payload
+        }
+        ,changeNationality: (state, action) => {
+            state.user.nationality = action.payload
+        }, changeEmail: (state, action) => {
+            state.user.email = action.payload
         }
     }
 })
