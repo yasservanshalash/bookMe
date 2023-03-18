@@ -82,9 +82,10 @@ export const displayUserInformationController = async (
 
 export const updateUserByIdController = async (req: Request, res: Response) => {
   try {
-    const saltRounds = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
-    req.body.password = hashPassword;
+    //const saltRounds = await bcrypt.genSalt(10);
+    //const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
+    // req.body.password = hashPassword;
+    console.log(req.params.userId, req.body);
     const updatedUser = await UserServices.updateById(
       req.params.userId,
       req.body
