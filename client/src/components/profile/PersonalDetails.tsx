@@ -136,6 +136,7 @@ const PersonalDetails = () => {
             <Typography>{ user.dateOfBirth ? user.dateOfBirth : `‎ `}</Typography>
             <Typography>Edit</Typography>
         </Box> */}
+      {/*welcome */}
       <Box
         sx={{
           display: "grid",
