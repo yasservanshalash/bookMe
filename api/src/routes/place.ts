@@ -1,4 +1,4 @@
-import { Router } from "Express";
+import { Router } from "express";
 import {
   updatePlaceController,
   getAllPlacesController,
@@ -19,4 +19,8 @@ router.put(
 );
 router.get("/", getAllPlacesController);
 router.get("/placeId", getPlaceById);
+router.post("/", createPlaceController);
+router.put("/:placeId", updatePlaceController);
+router.get("/alls", getAllPlacesController);
+
 export default router;

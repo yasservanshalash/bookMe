@@ -8,6 +8,8 @@ export type WishListDocument = Document & {
 const WishListSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: User },
   places: { type: [mongoose.Schema.Types.ObjectId], ref: Place },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  placeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Place' },
 });
 
 export default mongoose.model<WishListDocument>("WishList", WishListSchema);

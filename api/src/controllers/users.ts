@@ -128,24 +128,24 @@ export const deleteUserByIdController = async (req: Request, res: Response) => {
 
 export const googleAuthenticate = async (req: Request, res: Response) => {
   try {
-    console.log(req, "request");
-    const userData = req.body as UserDocument;
-    if (!userData) {
-      res.json({ message: "Cant find user with the email" });
-      return; //see 43:00 in googlelogin 1 video
-    }
-    // const token = jwt.sign(
-    // {
-    //     name: userData.name,
-    //     email: request.body.email,
-    // },
-    // JWT_SECRET,
-    // {
-    //     expiresIn: "1h",
-    // }
-    // );
-    // res.json({token, userData});
-    res.json({ userData });
+      console.log(req, "request");
+      const userData = req.body as UserDocument;
+      if (!userData) {
+          res.json({ message: "Cant find user with the email" })
+          return; //see 43:00 in googlelogin 1 video
+      }
+      // const token = jwt.sign(
+      // {
+      //     name: userData.name,
+      //     email: request.body.email,
+      // },
+      // JWT_SECRET,
+      // {
+      //     expiresIn: "1h",
+      // }
+      // );
+      // res.json({token, userData});
+      res.json({ userData });
   } catch (error) {
     console.log(error);
   }

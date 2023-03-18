@@ -12,6 +12,7 @@ import placeRouter from "./routes/place";
 import wishListRouter from "./routes/wishList";
 import reviewRouter from "./routes/review";
 import reservationRouter from "./routes/reservation";
+
 const app = Express();
 app.use(Express.json());
 app.use(cors());

@@ -6,7 +6,7 @@ import {
 } from "../controllers/reservation";
 import passport from "passport";
 
-const router = Router();
+ const router = Router();
 
 router.post(
   "/:userId",
@@ -25,3 +25,5 @@ router.delete(
 );
 
 export default router;
+
+  
