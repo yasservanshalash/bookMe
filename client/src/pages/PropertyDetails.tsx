@@ -1,36 +1,60 @@
-import { Box, Divider, IconButton, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Paper, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import React from "react";
-import { useSelector } from "react-redux";
+import Tab from "@mui/material/Tab";
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { Place } from "../types/types";
+import { Star } from "@mui/icons-material";
+import { filterActions } from '../redux/slices/filterSlice';
 
 const PropertyDetails = () => {
   const { id } = useParams();
-  const places = useSelector((state: RootState) => state.places.places);
-  const place: Place | undefined = places.find(
+  const place = useSelector((state: RootState) => state.places.places).find(
     (place) => String(place._id) === String(id)
-  );
+  ) as Place;
 
-  const [value, setValue] = React.useState('1');
+  const [total, setTotal] = useState(0);
+  const [value, setValue] = React.useState("1");
+  const [checkin, setCheckIn] =  useState(new Date().toISOString().split('T')[0]);
+  const [checkout, setCheckOut] =  useState(new Date().toISOString().split('T')[0]);
+  const [numOfDays, setNumOfDays]  = useState(1); 
 
+  const dispatch = useDispatch();
+
+  const checkInHandler = (e: any) => {
+    console.log(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
+    setTotal(numOfDays * place.price);
+    console.log(total)
+  }
+
+  const checkOutHandler = (e: any) => {
+    console.log(Number(Number(new Date(checkout)) - Number(new Date(checkin)))/ 86400000)
+    setTotal(numOfDays * place.price);
+    console.log(total)
+
+  }
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
-
   return (
     <Box sx={{ width: "85vw", margin: "50px auto" }}>
-      <Box sx={{margin: "0px 30px 30px 20px", display: "flex", alignItems: "center"}}>
+      <Box
+        sx={{
+          margin: "0px 30px 30px 20px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
         <IconButton component={Link} to="/properties">
-          <ArrowBackIcon sx={{ color: "black"}} />
+          <ArrowBackIcon sx={{ color: "black" }} />
         </IconButton>
-        <Typography sx={{ml: 5}}>Back to properties</Typography>
+        <Typography sx={{ ml: 5 }}>Back to properties</Typography>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         {place ? (
@@ -62,6 +86,7 @@ const PropertyDetails = () => {
                         objectFit: "cover",
                         borderRadius: "20px",
                       }}
+                      key={crypto.randomUUID()}
                     />
                   );
                 })}
@@ -70,76 +95,114 @@ const PropertyDetails = () => {
           )
         ) : null}
       </Box>
-      <Box sx={{m: 5}}>
-        <Typography variant="h6" sx={{fontWeight: "bold"}}>{place?.title}</Typography>
-        <Typography variant="subtitle1">{place?.description}</Typography>
-      </Box>
-      <Box sx={{ml: 3}}>
-      <Box sx={{ width: '100%', typography: 'body1' }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Overview" value="1" />
-            <Tab label="Rooms" value="2" />
-            <Tab label="Amenities" value="3" />
-            <Tab label="Policies" value="4" />
-          </TabList>
+      <Box sx={{display: "flex", gap: 10}}>
+      <Box sx={{width: "55%"}}>
+        <Box sx={{ m: 5 }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            {place?.title}
+          </Typography>
+          <Typography variant="subtitle1">{place?.descriptions}</Typography>
         </Box>
-        <TabPanel value="1">
-            <Box>
-                <Typography variant="h5" sx={{my: 2, fontWeight: "bold"}}>Property Overview</Typography>
+        <Box sx={{ ml: 3 }}>
+          <Box sx={{ width: "100%", typography: "body1" }}>
+            <TabContext value={value}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <TabList
+                  onChange={handleChange}
+                  aria-label="lab API tabs example"
+                >
+                  <Tab label="Overview" value="1" />
+                  <Tab label="Rooms" value="2" />
+                  <Tab label="Amenities" value="3" />
+                  <Tab label="Policies" value="4" />
+                </TabList>
+              </Box>
+              <TabPanel value="1">
                 <Box>
+                  <Typography variant="h5" sx={{ my: 2, fontWeight: "bold" }}>
+                    Property Overview
+                  </Typography>
+                  <Box>
                     {place?.perks.map((perk) => {
-                        return (
-                            <Typography>{perk}</Typography>
-                        )
+                      return <Typography>{perk}</Typography>;
                     })}
+                  </Box>
                 </Box>
-            </Box>
-        </TabPanel>
-        <TabPanel value="2">
-        <Box>
-                <Typography variant="h5" sx={{my: 2, fontWeight: "bold"}}>Property Rooms</Typography>
+              </TabPanel>
+              <TabPanel value="2">
                 <Box>
+                  <Typography variant="h5" sx={{ my: 2, fontWeight: "bold" }}>
+                    Property Rooms
+                  </Typography>
+                  <Box>
                     {place?.perks.map((perk) => {
-                        return (
-                            <Typography>{perk}</Typography>
-                        )
+                      return <Typography>{perk}</Typography>;
                     })}
+                  </Box>
                 </Box>
-            </Box>
-        </TabPanel>
-        <TabPanel value="3">
-        <Box>
-                <Typography variant="h5" sx={{my: 2, fontWeight: "bold"}}>Property Amenities</Typography>
+              </TabPanel>
+              <TabPanel value="3">
                 <Box>
+                  <Typography variant="h5" sx={{ my: 2, fontWeight: "bold" }}>
+                    Property Amenities
+                  </Typography>
+                  <Box>
                     {place?.perks.map((perk) => {
-                        return (
-                            <Typography>{perk}</Typography>
-                        )
+                      return <Typography>{perk}</Typography>;
                     })}
+                  </Box>
                 </Box>
-            </Box>
-        </TabPanel>
-        <TabPanel value="4">
-        <Box>
-                <Typography variant="h5" sx={{my: 2, fontWeight: "bold"}}>Property Policies</Typography>
+              </TabPanel>
+              <TabPanel value="4">
                 <Box>
+                  <Typography variant="h5" sx={{ my: 2, fontWeight: "bold" }}>
+                    Property Policies
+                  </Typography>
+                  <Box>
                     {place?.perks.map((perk) => {
-                        return (
-                            <Typography>{perk}</Typography>
-                        )
+                      return <Typography>{perk}</Typography>;
                     })}
+                  </Box>
                 </Box>
-            </Box>
-        </TabPanel>
-
-      </TabContext>
-    </Box>
+              </TabPanel>
+            </TabContext>
+          </Box>
+        </Box>
+        <Divider />
+        <Box sx={{ width: "80vw", margin: "0 auto" }}>
+          <Typography variant="h5" sx={{ my: 5, fontWeight: "bold" }}>
+            Reviews
+          </Typography>
+        </Box>
       </Box>
-      <Divider />
-      <Box sx={{ width: "80vw", margin: "0 auto" }}>
-        <Typography variant="h5" sx={{my: 5, fontWeight: "bold"}}>Reviews</Typography>
+      <Paper sx={{width: "30%", height: "40vh", p: 5, my: 5, display: "flex", flexDirection: "column"}}>
+        <Box sx={{display: "flex", justifyContent: "space-between"}}>
+        <Box>
+            <Typography variant="h6">{`$${place?.price}/night`}</Typography>
+          </Box>
+          <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <Typography sx={{display: "flex", alignItems: "center"}}><Star sx={{transform: "scale(0.7)"}}/>{`4.8`}</Typography>
+            <Typography>{`158 reviews`}</Typography>
+          </Box>
+        </Box>
+        <Box sx={{display: "flex", justifyContent: "space-evenly", my:2}}>
+        <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: 4}}>
+          <Typography sx={{fontWeight: "bold"}}>Check In</Typography>
+          <input type="date" name="checkin" id="checkin" style={{width: "17px", transform: "scale(3)", border: "0px", outline: "0px"}} onChange={checkInHandler}/>
+          <Typography>{checkin.toString().split('T')[0]}</Typography>
+        </Box>
+        <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: 4}}>
+          <Typography sx={{fontWeight: "bold"}}>Check Out</Typography>
+          <input type="date" name="checkout" id="checkout" style={{width: "17px", transform: "scale(3)", border: "0px", outline: "0px"}} onChange={checkOutHandler}/>
+          <Typography>{checkout.toString().split('T')[0]}</Typography>
+
+        </Box>
+        </Box>
+        <Typography sx={{alignSelf: "flex-end", my:4}}>{`$${numOfDays > 1 ? total : place?.price }`}</Typography>
+        <Box sx={{justifySelf: "flex-end"}}>
+          <Button variant="contained" sx={{width: "100%"}} disabled={checkin === null || checkout === null ? true : false}>Reserve</Button>
+        </Box>
+      </Paper>
       </Box>
     </Box>
   );

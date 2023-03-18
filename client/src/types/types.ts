@@ -12,16 +12,16 @@ export type User = {
 }
 
 export type Place = {
-  _id: string;
+  _id?: string;
     owner: string;
   title: string;
   address: string;
   photos: string[];
-  description: string;
+  descriptions: string;
   perks: string[];
   extraInfo: string;
-  checkIn: boolean;
-  checkOut: boolean;
+  checkIn?: boolean;
+  checkOut?: boolean;
   maxGuests: number;
   price: number;
   place: string;
