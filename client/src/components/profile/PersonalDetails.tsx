@@ -71,14 +71,12 @@ const PersonalDetails = () => {
                 dispatchThunk(editAvatar(user, avatar));
                 dispatch(userActions.changeAvatar(avatar));
                 console.log("Avatar changed");
-              }}
-            >
+              }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton
               onClick={() => setAvatarEdit(false)}
-              sx={{ "&:hover": { background: "transparent" } }}
-            >
+              sx={{ "&:hover": { background: "transparent" } }}>
               <CloseIcon sx={{ color: "coral" }} />
             </IconButton>
           </Box>
@@ -92,8 +90,7 @@ const PersonalDetails = () => {
             left: "65px",
             top: "70px",
           }}
-          onClick={() => setAvatarEdit(true)}
-        >
+          onClick={() => setAvatarEdit(true)}>
           <CameraAlt />
         </IconButton>
       </Box>
@@ -144,16 +141,14 @@ const PersonalDetails = () => {
           display: "grid",
           gridTemplateRows: "1fr 1fr 1fr 1fr 1fr",
           gap: 1,
-        }}
-      >
+        }}>
         {/* Name */}
         <Box
           sx={{
             display: "grid",
             gridTemplateColumns: "140px 400px 200px",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Box>
             <Typography>Name:</Typography>
           </Box>
@@ -170,9 +165,8 @@ const PersonalDetails = () => {
                 setNameEdit(false);
                 dispatchThunk(editNameThunk(user, name));
                 dispatch(userActions.changeName(name));
-                console.log("name changed");
-              }}
-            >
+                console.log("name changed compomnent", user, name);
+              }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setNameEdit(false)}>
@@ -180,7 +174,7 @@ const PersonalDetails = () => {
             </IconButton>
           </Box>
           <Box sx={{ display: !nameEdit ? "flex" : "none" }}>
-            <Typography>{user.name}</Typography>
+            <Typography>{user?.name}</Typography>
           </Box>
           <Box sx={{ display: !nameEdit ? "flex" : "none" }}>
             <Button onClick={() => setNameEdit(true)}>Edit</Button>
@@ -192,8 +186,7 @@ const PersonalDetails = () => {
             display: "grid",
             gridTemplateColumns: "140px 400px 200px",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Box>
             <Typography>phone number:</Typography>
           </Box>
@@ -213,8 +206,7 @@ const PersonalDetails = () => {
                 dispatchThunk(editPhoneNumberThunk(user, phoneNumber));
                 dispatch(userActions.changePhoneNumber(phoneNumber));
                 console.log("phone number changed");
-              }}
-            >
+              }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setPhoneNumberEdit(false)}>
@@ -234,13 +226,16 @@ const PersonalDetails = () => {
             display: "grid",
             gridTemplateColumns: "140px 400px 200px",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Box>
             <Typography>location:</Typography>
           </Box>
           <Box sx={{ display: locationEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new location" onChange={(e) => setLocation(e.target.value)}/>
+            <InputBase
+              sx={{ flex: 1 }}
+              placeholder="enter new location"
+              onChange={(e) => setLocation(e.target.value)}
+            />
           </Box>
           <Box sx={{ display: locationEdit ? "flex" : "none", gap: 5 }}>
             <IconButton
@@ -249,8 +244,7 @@ const PersonalDetails = () => {
                 dispatchThunk(editLocation(user, location));
                 dispatch(userActions.changeLocation(location));
                 console.log("location changed");
-              }}
-            >
+              }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setLocationEdit(false)}>
@@ -270,13 +264,16 @@ const PersonalDetails = () => {
             display: "grid",
             gridTemplateColumns: "140px 400px 200px",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Box>
             <Typography>Nationality:</Typography>
           </Box>
           <Box sx={{ display: nationalityEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new nationality" onChange={(e) => setNationality(e.target.value)} />
+            <InputBase
+              sx={{ flex: 1 }}
+              placeholder="enter new nationality"
+              onChange={(e) => setNationality(e.target.value)}
+            />
           </Box>
           <Box sx={{ display: nationalityEdit ? "flex" : "none", gap: 5 }}>
             <IconButton
@@ -285,8 +282,7 @@ const PersonalDetails = () => {
                 dispatchThunk(editNationality(user, nationality));
                 dispatch(userActions.changeNationality(nationality));
                 console.log("nationality changed");
-              }}
-            >
+              }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setNationalityEdit(false)}>
@@ -306,13 +302,16 @@ const PersonalDetails = () => {
             display: "grid",
             gridTemplateColumns: "140px 400px 200px",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Box>
             <Typography>Email:</Typography>
           </Box>
           <Box sx={{ display: emailEdit ? "flex" : "none" }}>
-            <InputBase sx={{ flex: 1 }} placeholder="enter new email" onChange={(e) => setEmail(e.target.value)}/>
+            <InputBase
+              sx={{ flex: 1 }}
+              placeholder="enter new email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </Box>
           <Box sx={{ display: emailEdit ? "flex" : "none", gap: 5 }}>
             <IconButton
@@ -321,8 +320,7 @@ const PersonalDetails = () => {
                 dispatchThunk(editEmail(user, email));
                 dispatch(userActions.changeEmail(email));
                 console.log("email changed");
-              }}
-            >
+              }}>
               <DoneIcon sx={{ color: "lightgreen" }} />
             </IconButton>
             <IconButton onClick={() => setEmailEdit(false)}>

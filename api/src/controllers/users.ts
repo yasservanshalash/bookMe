@@ -1,7 +1,7 @@
 import { Request, Response } from "Express";
 import bcrypt from "bcrypt";
 
-import User, { UserDocument }  from "../models/User";
+import User, { UserDocument } from "../models/User";
 import UserServices from "../services/users";
 import generateToken from "../util/generateToken";
 
@@ -82,9 +82,10 @@ export const displayUserInformationController = async (
 
 export const updateUserByIdController = async (req: Request, res: Response) => {
   try {
-    const saltRounds = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
-    req.body.password = hashPassword;
+    //const saltRounds = await bcrypt.genSalt(10);
+    //const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
+    // req.body.password = hashPassword;
+    console.log(req.params.userId, req.body);
     const updatedUser = await UserServices.updateById(
       req.params.userId,
       req.body
@@ -127,25 +128,25 @@ export const deleteUserByIdController = async (req: Request, res: Response) => {
 
 export const googleAuthenticate = async (req: Request, res: Response) => {
   try {
-      console.log(req, "request");
-      const userData = req.user as UserDocument;
-      if (!userData) {
-          res.json({ message: "Cant find user with the email" })
-          return; //see 43:00 in googlelogin 1 video
-      }
-      // const token = jwt.sign(
-      // {
-      //     name: userData.name,
-      //     email: request.body.email,
-      // },
-      // JWT_SECRET,
-      // {
-      //     expiresIn: "1h",
-      // }
-      // );
-      // res.json({token, userData});
-      res.json({ userData });
+    console.log(req, "request");
+    const userData = req.body as UserDocument;
+    if (!userData) {
+      res.json({ message: "Cant find user with the email" });
+      return; //see 43:00 in googlelogin 1 video
+    }
+    // const token = jwt.sign(
+    // {
+    //     name: userData.name,
+    //     email: request.body.email,
+    // },
+    // JWT_SECRET,
+    // {
+    //     expiresIn: "1h",
+    // }
+    // );
+    // res.json({token, userData});
+    res.json({ userData });
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 };

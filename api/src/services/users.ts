@@ -23,33 +23,29 @@ const deleteByEmail = async (userId: String): Promise<UserDocument | null> => {
 
 const updateById = async (
   userId: String,
-  userUpdates: UserDocument
+  userUpdates: Partial<UserDocument>
 ): Promise<UserDocument | null> => {
   return User.findByIdAndUpdate(userId, userUpdates, { new: true });
 };
-
-
-
 
 const createOrFindUserByEmail = async (
   // userId: string,
   payload: Partial<UserDocument>
 ): Promise<UserDocument | null> => {
- console.log(payload, "payload");
- 
- const userEmail = payload.email;
- const result = await User.findOne({email: userEmail});
+  console.log(payload, "payload");
 
- if (result) {
-  return result;
- }
- else{
-  const user = new User({
+  const userEmail = payload.email;
+  const result = await User.findOne({ email: userEmail });
+
+  if (result) {
+    return result;
+  } else {
+    const user = new User({
       name: payload.name,
-      email:payload.email,
-  })
-  return user.save();
- }
+      email: payload.email,
+    });
+    return user.save();
+  }
 };
 
 export default {
