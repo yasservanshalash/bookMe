@@ -22,7 +22,4 @@ app.use("/places", placeRouter);
 app.use("/wishlist", wishListRouter);
 app.use("/review", reviewRouter);
 
-app.use(passport.initialize());
-passport.use(googleStrategy)
-
 export default app;
