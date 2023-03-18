@@ -11,7 +11,7 @@ const FavoriteItem = ({property}: {property: Place}) => {
       <img src={property.photos[0]} style={{width: "235px", height: "250px", padding: "12px", borderRadius: "20px"}}/>
 
       </Box>
-    <Chip label={property.title} variant="outlined" sx={{position: "absolute", top: "30px", left: "30px", backgroundColor: "#a2cf6e",px: 0.5    , borderRadius: "20px",}}/>
+    <Chip label={property.place} variant="outlined" sx={{position: "absolute", top: "30px", left: "30px", backgroundColor: "#a2cf6e",px: 0.5    , borderRadius: "20px",}}/>
     </Box>
     <Box sx={{width: "90%", margin: "0 auto 20px auto",display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "flex-start", position: "relative"}}>
         <Typography variant='subtitle1' sx={{fontWeight: "bold"}}>{property.title}</Typography>
