@@ -13,6 +13,9 @@ import { Star } from "@mui/icons-material";
 import { filterActions } from '../redux/slices/filterSlice';
 import { reservationActions } from "../redux/slices/reservationSlice";
 
+import FiveStarRating from '../components/FiveStarRating/FiveStarRating';
+
+
 const PropertyDetails = () => {
 
   const { id } = useParams();
@@ -54,6 +57,11 @@ const PropertyDetails = () => {
     setValue(newValue);
   };
 
+
+  const handleRatingChange = (newValue: number) => {
+    console.log(`New rating value: ${newValue}`);
+    // Handle the new rating value (e.g., update the rating in the database)
+  };
   return (
     <Box sx={{ width: "85vw", margin: "50px auto" }}>
       <Box
@@ -217,6 +225,15 @@ const PropertyDetails = () => {
           }}>Reserve</Button>
         </Box>
       </Paper>
+      </Box>
+      
+      <Box>
+        <h3>Average rating:</h3>
+        <FiveStarRating value={4} readOnly />
+      </Box>
+      <Box>
+        <h3>Rate this property:</h3>
+        <FiveStarRating value={3} onChange={handleRatingChange} />
       </Box>
     </Box>
   );
