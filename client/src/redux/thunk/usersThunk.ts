@@ -7,7 +7,7 @@ export function editNameThunk(user: User, name: string) {
   return async (dispatch: AppDispatch) => {
     console.log("result is", user._id, name);
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      "name": name,
+      name: name,
     });
 
     dispatch(userActions.changeName(result.data.name));
@@ -17,7 +17,7 @@ export function editNameThunk(user: User, name: string) {
 export function editAvatar(user: User, avatar: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      "avatar": avatar,
+      avatar: avatar,
     });
     dispatch(userActions.changeAvatar(result.data.avatar));
   };
@@ -33,7 +33,7 @@ export function editPhoneNumberThunk(user: User, phoneNumber: string) {
 export function editLocation(user: User, location: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      "place": location,
+      place: location,
     });
     dispatch(userActions.changeLocation(result.data.place));
   };
@@ -41,7 +41,7 @@ export function editLocation(user: User, location: string) {
 export function editNationality(user: User, nationality: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      "nationality": nationality,
+      nationality: nationality,
     });
     dispatch(userActions.changeNationality(result.data.nationality));
   };
@@ -49,7 +49,7 @@ export function editNationality(user: User, nationality: string) {
 export function editEmail(user: User, email: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      "avatar": email,
+      email: email,
     });
     dispatch(userActions.changeEmail(result.data));
   };

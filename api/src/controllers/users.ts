@@ -45,7 +45,12 @@ export const loginWithPasswordController = async (
       });
       return;
     }
-
+    /*  if (userData.isBanned == true) {
+      res.status(401).json({
+        massage: `Hello ${req.body.email} ,you are banned,You can't login`,
+      });
+      return;
+    } */
     const databasePassword = userData.password;
     const inputPassword = req.body.password;
 
@@ -95,7 +100,24 @@ export const updateUserByIdController = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
+/* export const updateUserPasswordByIdController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const saltRounds = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, saltRounds);
+    //req.body.password = hashPassword;
+    console.log(req.params.userId, hashPassword);
+    const updatedUser = await UserServices.updateById(
+      req.params.userId,
+      hashPassword
+    );
+    res.json(updatedUser);
+  } catch (error) {
+    console.log(error);
+  }
+}; */
 export const displayAllInformationController = async (
   req: Request,
   res: Response
@@ -129,7 +151,7 @@ export const deleteUserByIdController = async (req: Request, res: Response) => {
 export const googleAuthenticate = async (req: Request, res: Response) => {
   try {
     console.log(req, "request");
-    const userData = req.body as UserDocument;
+    const userData = req.user as UserDocument;
     if (!userData) {
       res.json({ message: "Cant find user with the email" });
       return; //see 43:00 in googlelogin 1 video
