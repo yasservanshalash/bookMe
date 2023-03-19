@@ -14,6 +14,13 @@ import { filterActions } from '../redux/slices/filterSlice';
 import { reservationActions } from "../redux/slices/reservationSlice";
 
 import FiveStarRating from '../components/FiveStarRating/FiveStarRating';
+<<<<<<< Updated upstream
+||||||| Stash base
+import { display } from "@mui/system";
+=======
+import ReviewForm from "../components/ReviewForm/ReviewForm";
+import { display } from "@mui/system";
+>>>>>>> Stashed changes
 
 
 const PropertyDetails = () => {
@@ -226,6 +233,7 @@ const PropertyDetails = () => {
         </Box>
       </Paper>
       </Box>
+<<<<<<< Updated upstream
       
       <Box>
         <h3>Average rating:</h3>
@@ -235,6 +243,10 @@ const PropertyDetails = () => {
         <h3>Rate this property:</h3>
         <FiveStarRating value={3} onChange={handleRatingChange} />
       </Box>
+||||||| Stash base
+=======
+      <ReviewForm />
+>>>>>>> Stashed changes
     </Box>
   );
 };
