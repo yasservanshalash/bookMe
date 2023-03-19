@@ -11,7 +11,6 @@ export function fetchPlacesData() {
     return async (dispatch: AppDispatch) => {
         const response = await fetch(url);
         const placesData = await response.json();
-        console.log(placesData)
         dispatch(placeActions.getAllPlaces(placesData));
     }
 }

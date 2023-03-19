@@ -17,14 +17,17 @@ import Profile from './pages/Profile';
 import FavoritesPage from './pages/FavoritesPage';
 import GoogleLogIn from './components/GoogleLogIn';
 import Dashboard from './pages/Dashboard';
+import { fetchAllReviews } from './redux/thunk/reviewsThunk';
 function App() {
   const places = useSelector((state: RootState) => state.places.places)
+  const reviews = useSelector((state: RootState) => state.reviews.reviews)
   const dispatchThunk = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatchThunk(fetchPlacesData());
+    dispatchThunk(fetchAllReviews())
   }, [])
-  console.log(places)
+  console.log(reviews)
   return (
     <Box className="App" sx={{display: "flex", flexDirection:"column"}}>
       <NavBar />
