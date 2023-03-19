@@ -1,4 +1,4 @@
-import { Box, Button, Divider, IconButton, Paper, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Paper, Rating, TextField, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -14,6 +14,7 @@ import { filterActions } from '../redux/slices/filterSlice';
 import { reservationActions } from "../redux/slices/reservationSlice";
 
 import FiveStarRating from '../components/FiveStarRating/FiveStarRating';
+import { display } from "@mui/system";
 
 
 const PropertyDetails = () => {
@@ -30,6 +31,8 @@ const PropertyDetails = () => {
   const [checkin, setCheckIn] =   useState(new Date().toDateString());
   const [checkout, setCheckOut] =   useState(new Date().toDateString());
   const [numOfDays, setNumOfDays]  = useState(1); 
+  const [rating, setRating] = React.useState<number | null>(2);
+    const [reviewText, setReviewText] = useState("");
   // const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const dispatch = useDispatch();
 
@@ -193,6 +196,32 @@ const PropertyDetails = () => {
           <Typography variant="h5" sx={{ my: 5, fontWeight: "bold" }}>
             Reviews
           </Typography>
+          <Box sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+          <Rating
+        name="simple-controlled"
+        value={rating}
+        onChange={(event, newValue) => {
+          setRating(newValue);
+        }}
+
+      />
+              <TextField
+          id="outlined-multiline-static"
+          label="Review"
+          multiline
+          rows={4}
+          defaultValue=""
+          placeholder="Enter review..."
+          sx={{my: 3, width: "800px"}}
+          onChange={(e) => {
+            setReviewText(e.target.value)
+          }}
+        />
+        <Button onClick={() => {
+          console.log(rating);
+          console.log(reviewText)
+        }}>Add review</Button>
+      </Box>
         </Box>
       </Box>
       <Paper sx={{width: "30%", height: "40vh", p: 5, my: 5, display: "flex", flexDirection: "column"}}>
@@ -225,15 +254,6 @@ const PropertyDetails = () => {
           }}>Reserve</Button>
         </Box>
       </Paper>
-      </Box>
-      
-      <Box>
-        <h3>Average rating:</h3>
-        <FiveStarRating value={4} readOnly />
-      </Box>
-      <Box>
-        <h3>Rate this property:</h3>
-        <FiveStarRating value={3} onChange={handleRatingChange} />
       </Box>
     </Box>
   );
