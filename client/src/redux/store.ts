@@ -4,13 +4,15 @@ import placeReducer from "./slices/placesSlice";
 import reservationReducer from "./slices/reservationSlice";
 import reviewReducer from "./slices/reviewSlice";
 import userReducer from "./slices/userSlice";
+import favoriteReducer from "./slices/favoriteSlice";
 const store = configureStore({
     reducer: {
         places: placeReducer,
         users: userReducer,
         filter: filterReducer,
         reservations: reservationReducer,
-        reviews: reviewReducer
+        reviews: reviewReducer,
+        favorites: favoriteReducer
     }
 })
 

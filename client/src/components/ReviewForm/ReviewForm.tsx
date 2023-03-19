@@ -10,11 +10,13 @@ import { addReview, fetchAllReviews, fetchReviewsByPlaceId } from '../../redux/t
 
 
 const ReviewForm = ({place} : {place: Place}) => {
+
   const [rating, setRating] = useState<number>(0);
   const [reviewText, setReviewText] = useState<string>('');
   const [reviews, setReviews] = useState<Review[]>([]);
 
   const reviewsDB = useSelector((state: RootState) => state.reviews.reviews)
+
   const user = useSelector((state: RootState) => state.users.user);
   const dispatchThunk = useDispatch<AppDispatch>();
 

@@ -46,3 +46,10 @@ export type Review = {
   rating: number;
   review: string;
 }
+
+
+export type Favorite = {
+  _id:string;
+  userId:string;
+  places:Place[];
+}
