@@ -33,9 +33,15 @@ const checkWishListAlreadyExistByUserId = async (
   const result = WishList.find({ userId: userId, places: placeId });
   return result;
 };
+
+const updateWishList  = async (id: string, newData: Partial<WishListDocument>): Promise<WishListDocument |null> => {
+  return WishList.findByIdAndUpdate(id, newData, { new: true});
+}
+
 export default {
   addToWishList,
   removeFromWishList,
   getAllWishListByUserId,
   checkWishListAlreadyExistByUserId,
+  updateWishList
 };
