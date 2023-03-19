@@ -129,7 +129,7 @@ export const deleteUserByIdController = async (req: Request, res: Response) => {
 export const googleAuthenticate = async (req: Request, res: Response) => {
   try {
     console.log(req, "request");
-    const userData = req.body as UserDocument;
+    const userData = req.user as UserDocument;
     if (!userData) {
       res.json({ message: "Cant find user with the email" });
       return; //see 43:00 in googlelogin 1 video
