@@ -10,7 +10,7 @@ export function editNameThunk(user: User, name: string) {
       name: name,
     });
 
-    dispatch(userActions.changeName(result.data));
+    dispatch(userActions.changeName(result.data.name));
   };
 }
 
@@ -19,7 +19,7 @@ export function editAvatar(user: User, avatar: string) {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
       avatar: avatar,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeAvatar(result.data.avatar));
   };
 }
 export function editPhoneNumberThunk(user: User, phoneNumber: string) {
@@ -27,15 +27,15 @@ export function editPhoneNumberThunk(user: User, phoneNumber: string) {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
       phoneNumber: phoneNumber,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changePhoneNumber(result.data.phoneNumber));
   };
 }
 export function editLocation(user: User, location: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      location: location,
+      place: location,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeLocation(result.data.place));
   };
 }
 export function editNationality(user: User, nationality: string) {
@@ -43,7 +43,7 @@ export function editNationality(user: User, nationality: string) {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
       nationality: nationality,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeNationality(result.data.nationality));
   };
 }
 export function editEmail(user: User, email: string) {
@@ -51,7 +51,7 @@ export function editEmail(user: User, email: string) {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
       email: email,
     });
-    dispatch(userActions.changeAvatar(result.data));
+    dispatch(userActions.changeEmail(result.data));
   };
 }
 

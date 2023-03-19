@@ -26,17 +26,14 @@ const SignUp = () => {
     email: Yup.string()
       .email("Invalid email")
       .required("email is required to SignUp"),
-    password: Yup.string()
-      .min(6, "Password too short!")
-      .max(20, "Password tooo Long!")
-      .required("Password is required to sign up")
+      password: Yup.string()
+      .min(8, "It should be more than 7 character")
       .matches(
-        /^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$/,
-        "Password must have at least one letter one number and 6 characters at least in total."
-      ),
-      name: Yup.string()
-      .required("name is required to sign up"),
-    });
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
+      )
+      .required("Please Enter your password"),
+  });
 
   return (
     <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", my: 3}}>
