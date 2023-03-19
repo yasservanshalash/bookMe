@@ -30,7 +30,6 @@ const PropertyDetails = () => {
   // const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const dispatch = useDispatch();
 
-
   const checkInHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setCheckIn(new Date(value).toDateString());
