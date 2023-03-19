@@ -14,6 +14,8 @@ import { filterActions } from '../redux/slices/filterSlice';
 import { reservationActions } from "../redux/slices/reservationSlice";
 
 import FiveStarRating from '../components/FiveStarRating/FiveStarRating';
+
+import ReviewForm from "../components/ReviewForm/ReviewForm";
 import { display } from "@mui/system";
 
 
@@ -255,6 +257,8 @@ const PropertyDetails = () => {
         </Box>
       </Paper>
       </Box>
+
+      <ReviewForm />
     </Box>
   );
 };
