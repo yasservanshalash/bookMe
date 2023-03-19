@@ -49,7 +49,7 @@ export function editNationality(user: User, nationality: string) {
 export function editEmail(user: User, email: string) {
   return async (dispatch: AppDispatch) => {
     const result = await axios.put("http://localhost:8013/users/" + user._id, {
-      avatar: email,
+      email: email,
     });
     dispatch(userActions.changeAvatar(result.data));
   };
