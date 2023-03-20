@@ -17,6 +17,10 @@ import Profile from './pages/Profile';
 import FavoritesPage from './pages/FavoritesPage';
 import GoogleLogIn from './components/GoogleLogIn';
 import Dashboard from './pages/Dashboard';
+
+// import ReservationTable from './components/ReservationTable/ReservationTable';
+
+
 function App() {
   const places = useSelector((state: RootState) => state.places.places)
   const dispatchThunk = useDispatch<AppDispatch>();
@@ -39,6 +43,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       <Footer />
+      {/* <ReservationTable /> */}
     </Box>
   );
 }

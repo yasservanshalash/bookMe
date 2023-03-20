@@ -1,3 +1,5 @@
+//client\src\pages\Dashboard.tsx
+
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Button, Tab, Tabs, TextField, Typography } from "@mui/material";
 import React, { KeyboardEventHandler, useState } from "react";
@@ -6,6 +8,9 @@ import { placeActions } from "../redux/slices/placesSlice";
 import { AppDispatch, RootState } from "../redux/store";
 import { addPlaceThunk } from "../redux/thunk/placesThunk";
 import UserList from "../components/user/UserList";
+import ReservationTable from "../components/ReservationTable/ReservationTable";
+
+
 const Dashboard = () => {
   const [value, setValue] = React.useState("1");
 
@@ -48,7 +53,7 @@ const Dashboard = () => {
             <UserList></UserList>
           </Box>
         </TabPanel>
-        <TabPanel value="2">Reservation Table</TabPanel>
+        <TabPanel value="2"><ReservationTable /></TabPanel>
         <TabPanel value="3">
           <Typography variant="h6">New Place</Typography>
           <Box

@@ -40,9 +40,10 @@ export type Reservation = {
 }
 
 export type Review = {
-  _id: string;
-  userId: string;
-  place: Place;
+  _id?: string;
+  userId?: string;
+  place?: Place;
   rating: number;
   review: string;
+  // text: string;
 }
