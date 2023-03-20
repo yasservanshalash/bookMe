@@ -198,7 +198,7 @@ const PropertyDetails = () => {
           <Typography variant="h5" sx={{ my: 5, fontWeight: "bold" }}>
             Reviews
           </Typography>
-          <Box sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+          {/* <Box sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
           <Rating
         name="simple-controlled"
         value={rating}
@@ -223,7 +223,7 @@ const PropertyDetails = () => {
           console.log(rating);
           console.log(reviewText)
         }}>Add review</Button>
-      </Box>
+      </Box> */}
         </Box>
       </Box>
       <Paper sx={{width: "30%", height: "40vh", p: 5, my: 5, display: "flex", flexDirection: "column"}}>
@@ -258,7 +258,7 @@ const PropertyDetails = () => {
       </Paper>
       </Box>
 
-      <ReviewForm />
+      <ReviewForm place={place}/>
     </Box>
   );
 };

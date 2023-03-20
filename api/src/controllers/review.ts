@@ -65,7 +65,7 @@ export const getReviewForSinglePlace = async (req: Request, res: Response) => {
     else finalRating = 1;
     console.log("finalRating is", finalRating);
 
-    res.json({ reviews: `${reviews}`, finalRating: `${finalRating}` });
+    res.json({ reviews: [...reviews], finalRating: `${finalRating}` });
   } catch (error) {
     console.log(error);
   }

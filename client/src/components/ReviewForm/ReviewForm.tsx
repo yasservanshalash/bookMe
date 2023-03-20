@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FiveStarRating from '../FiveStarRating/FiveStarRating';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { AppDispatch, RootState } from '../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { Place, Review } from '../../types/types';
+import { addReview, fetchAllReviews, fetchReviewsByPlaceId } from '../../redux/thunk/reviewsThunk';
 
-interface Review {
-  rating: number;
-  text: string;
-}
 
-const ReviewForm = () => {
+const ReviewForm = ({place} : {place: Place}) => {
+
   const [rating, setRating] = useState<number>(0);
   const [reviewText, setReviewText] = useState<string>('');
   const [reviews, setReviews] = useState<Review[]>([]);
 
+  const reviewsDB = useSelector((state: RootState) => state.reviews.reviews)
+
+  const user = useSelector((state: RootState) => state.users.user);
+  const dispatchThunk = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    console.log(place._id)
+    // dispatchThunk(fetchReviewsByPlaceId(place._id as string))
+    dispatchThunk(fetchAllReviews())
+    setReviews(reviewsDB)
+    console.log(reviewsDB, "reviews")
+
+  }, [dispatchThunk, reviews])
+  console.log(reviewsDB, "reviews")
   const handleRatingChange = (newValue: number) => {
     setRating(newValue);
   };
@@ -23,7 +38,17 @@ const ReviewForm = () => {
   };
 
   const handleSubmit = () => {
-    setReviews([...reviews, { rating, text: reviewText }]);
+    setReviews([...reviews, { rating: rating, review: reviewText }]);
+    console.log(user._id, place._id, rating, reviewText)
+    dispatchThunk(addReview(user._id, place._id as string, rating, reviewText))
+
+
+
+    dispatchThunk(fetchReviewsByPlaceId(place._id as string))
+    dispatchThunk(fetchAllReviews())
+
+    setReviews(reviewsDB);
+
     setRating(0);
     setReviewText('');
   };
@@ -46,11 +71,11 @@ const ReviewForm = () => {
         Submit
       </Button>
       <h3>Reviews:</h3>
-      <Box>
-        {reviews.map((review, index) => (
-          <Box key={index}>
-            <FiveStarRating value={review.rating} readOnly />
-            <p>{review.text}</p>
+      <Box sx={{display: "flex", flexDirection: "column-reverse" }}>
+        {reviewsDB.filter((review: Review) => review.place === place._id).map((review: Review) => (
+          <Box key={crypto.randomUUID()} >
+            <FiveStarRating value={+review.rating} readOnly />
+            <p>{review.review}</p>
           </Box>
         ))}
       </Box>

@@ -48,10 +48,10 @@ const NavBar = () => {
               to="/dashboard"
               style={{
                 textDecoration: "none",
-                display: user.isAdmin === true ? "flex" : "flex",
+                display: user.isAdmin === true ? "flex" : "none",
               }}>
               <Typography sx={{ textDecoration: "none", color: "black" }}>
-                dashboard
+                Dashboard
               </Typography>
             </Link>
             <Link to="/properties" style={{ textDecoration: "none" }}>
@@ -95,7 +95,7 @@ const NavBar = () => {
             mr: 5,
           }}>
           {/* <img src={user.avatar} alt="avatar" style={{width: "50px", borderRadius: "50%"}}/> */}
-          <Typography component={Link} to="/favorites">
+          <Typography component={Link} to="/favorites" sx={{textDecoration: "none", color: "black"}}>
             Favorites
           </Typography>
           <IconButton

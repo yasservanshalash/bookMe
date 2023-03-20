@@ -13,7 +13,7 @@ const LovedPlaces = () => {
         {
           places.slice(0,5).map((place) => {
             return (
-              <LovedPlace name={place.title} city={place.place}  price={place.price} rating={9.2} image={place.photos[0]} />
+              <LovedPlace key={place._id} name={place.title} city={place.place}  price={place.price} rating={9.2} image={place.photos[0]} />
 
             )
           })

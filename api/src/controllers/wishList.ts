@@ -76,3 +76,14 @@ export const deleteWishList = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const updateFavoritesController = async (req: Request, res: Response) => {
+  try {
+      const id = req.params.id;
+      const newData = req.body;
+      const favorites = await wishListService.updateWishList(id, newData);
+      res.status(200).json(favorites);
+  } catch(error) {
+     res.json(error);
+  }
+}

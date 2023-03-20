@@ -45,5 +45,11 @@ export type Review = {
   place?: Place;
   rating: number;
   review: string;
-  // text: string;
+}
+
+
+export type Favorite = {
+  _id:string;
+  userId:string;
+  places:Place[];
 }

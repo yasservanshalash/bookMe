@@ -1,15 +1,47 @@
-import { Box, Button, Chip, Paper, Typography } from "@mui/material";
+import { Box, Button, Chip, IconButton, Paper, Typography } from "@mui/material";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from "axios";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { Place } from "../../types/types";
+import { favoriteActions } from "../../redux/slices/favoriteSlice";
+import { addToFavoritesThunk } from "../../redux/thunk/favoriteThunk";
 
 const PropertyItem = ({ property }: { property: Place }) => {
+  const [isFavorited, setIsFavorited] = useState(false)
   const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
   const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
+  const user = useSelector((state: RootState) => state.users.user)
+  const favorite = useSelector((state: RootState) => state.favorites.favorites)
+  const dispatch = useDispatch()
+  const thunkDispatch = useDispatch<AppDispatch>();
+  const addToFav = () => {
+    if (user._id === "") {
+      if (favorite.places.find((place) => place.title === property.title)) {
+        return;
+      } else {
+        dispatch(favoriteActions.addFavorite(property));
+      }
+    } else {
+      if (favorite.places.find((place) => place.title === property.title)) {
+        return;
+      } else {
+        dispatch(favoriteActions.addFavorite(property));
+        thunkDispatch(addToFavoritesThunk(user._id, favorite, property));
+        console.log(property);
+      }
+    }
+  };
+  const removeFromFav = () => {
+
+  }
+
+  const favoriteHandler = () => {
+
+  }
   return (
     <Paper sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box sx={{ display: "flex", textAlign: "left" }}>
@@ -62,7 +94,7 @@ const PropertyItem = ({ property }: { property: Place }) => {
             p: 2,
             gap: 8,
           }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 2, mr: 3 }}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography variant="subtitle2" sx={{ fontSize: "70%" }}>
                 Execllent
@@ -89,6 +121,10 @@ const PropertyItem = ({ property }: { property: Place }) => {
               variant="h6"
               sx={{ fontWeight: "bold" }}>{`$${numberOfDays > 1 ? property.price * numberOfDays : property.price}`}</Typography>
             <Typography>{`${numberOfDays > 1 ? numberOfDays + " nights" : "1 night"}, ${numberOfVisitors > 1 ? numberOfVisitors + " guests": "1 guest"} `}</Typography>
+            <Box sx={{display: "flex", alignItems: "center", gap: 3}}>
+            <IconButton onClick={favoriteHandler}>
+              <FavoriteBorderIcon sx={{color: isFavorited ? "red": "lightgray"}}/>
+            </IconButton>
             <Link
               to={`/properties/${property._id}`}
               style={{ textDecoration: "none" }}>
@@ -96,6 +132,7 @@ const PropertyItem = ({ property }: { property: Place }) => {
                 See more
               </Button>
             </Link>
+            </Box>
           </Box>
         </Box>
       </Box>
