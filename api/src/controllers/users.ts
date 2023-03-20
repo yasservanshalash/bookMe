@@ -25,7 +25,7 @@ export const createUserController = async (req: Request, res: Response) => {
     const userEmail = await UserServices.getUserByEmail(email);
     if (!userEmail) {
       const user = await UserServices.createUser(newUser);
-      res.json({ status: "success", message: `Registration successful.` });
+      res.json({ status: "success", message: `Registration successful.`, newUser });
     }
     res.json({ message: `${req.body.email} is already registered.` });
   } catch (error) {

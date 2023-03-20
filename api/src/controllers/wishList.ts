@@ -11,12 +11,12 @@ export const createWishListController = async (req: Request, res: Response) => {
     const checkExist: WishListDocument[] | null =
       await wishListService.checkWishListAlreadyExistByUserId(
         userId,
-        places.toString()
+        places?.toString()
       );
     // console.log("userid", req.body);
     const newList = new WishList({
       userId: userId,
-      places: places.toString(),
+      places: places?.toString(),
     });
     console.log("check", checkExist);
     if (checkExist?.length) {
