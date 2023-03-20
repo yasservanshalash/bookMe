@@ -10,38 +10,48 @@ import { favoriteActions } from "../../redux/slices/favoriteSlice";
 import { addToFavoritesThunk } from "../../redux/thunk/favoriteThunk";
 
 const PropertyItem = ({ property }: { property: Place }) => {
+  console.log(property)
   const [isFavorited, setIsFavorited] = useState(false)
   const searchTerm = useSelector((state: RootState) => state.filter.searchTerm)
   const numberOfDays = useSelector((state: RootState) => state.filter.numOfDays)
   const numberOfVisitors = useSelector((state: RootState) => state.filter.numberOfVisitors)
   const user = useSelector((state: RootState) => state.users.user)
   const favorite = useSelector((state: RootState) => state.favorites.favorites)
+  console.log(favorite)
   const dispatch = useDispatch()
   const thunkDispatch = useDispatch<AppDispatch>();
   const addToFav = () => {
     if (user._id === "") {
-      if (favorite.places.find((place) => place.title === property.title)) {
+      if (favorite.places.find((place) => place?.title?.toLocaleLowerCase() === property?.title?.toLocaleLowerCase())) {
         return;
       } else {
         dispatch(favoriteActions.addFavorite(property));
+        setIsFavorited(true);
       }
     } else {
-      if (favorite.places.find((place) => place.title === property.title)) {
+      if (favorite?.places?.find((place) => place?.title.toLocaleLowerCase() === property?.title.toLocaleLowerCase())) {
         return;
       } else {
         dispatch(favoriteActions.addFavorite(property));
         thunkDispatch(addToFavoritesThunk(user._id, favorite, property));
         console.log(property);
+        setIsFavorited(true)
       }
     }
   };
   const removeFromFav = () => {
-
+    setIsFavorited(false)
   }
 
-  const favoriteHandler = () => {
-
-  }
+  // const favoriteHandler = () => {
+  //   if (isFavorited) {
+  //     removeFromFav();
+  //     setIsFavorited(false);
+  //   } else {
+  //     addToFav();
+  //     setIsFavorited(true);
+  //   }
+  // }
   return (
     <Paper sx={{ display: "flex", justifyContent: "space-between" }}>
       <Box sx={{ display: "flex", textAlign: "left" }}>
@@ -122,7 +132,7 @@ const PropertyItem = ({ property }: { property: Place }) => {
               sx={{ fontWeight: "bold" }}>{`$${numberOfDays > 1 ? property.price * numberOfDays : property.price}`}</Typography>
             <Typography>{`${numberOfDays > 1 ? numberOfDays + " nights" : "1 night"}, ${numberOfVisitors > 1 ? numberOfVisitors + " guests": "1 guest"} `}</Typography>
             <Box sx={{display: "flex", alignItems: "center", gap: 3}}>
-            <IconButton onClick={favoriteHandler}>
+            <IconButton onClick={() => isFavorited ? removeFromFav() : addToFav()}>
               <FavoriteBorderIcon sx={{color: isFavorited ? "red": "lightgray"}}/>
             </IconButton>
             <Link

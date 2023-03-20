@@ -21,12 +21,14 @@ import { fetchAllReviews } from './redux/thunk/reviewsThunk';
 function App() {
   const places = useSelector((state: RootState) => state.places.places)
   const reviews = useSelector((state: RootState) => state.reviews.reviews)
+  const favorites = useSelector((state: RootState) => state.favorites.favorites)
   const dispatchThunk = useDispatch<AppDispatch>();
-
   useEffect(() => {
     dispatchThunk(fetchPlacesData());
     dispatchThunk(fetchAllReviews())
   }, [])
+  console.log(favorites, "favorites")
+
   console.log(reviews)
   return (
     <Box className="App" sx={{display: "flex", flexDirection:"column"}}>

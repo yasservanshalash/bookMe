@@ -14,8 +14,9 @@ export function fetchFavorites(url: string) {
 
 export function addToFavoritesThunk(userId: string, favorites: Favorite, place: Place) {
     return async (dispatch: AppDispatch) => {
-        const places = favorites.places.concat([place])
-        const result = await axios.put("http://localhost:8013/wishlist/" + favorites._id , {"places": places})
+        const places = favorites?.places
+        places?.push(place);
+        const result = await axios.put("http://localhost:8013/wishlist/" + userId , {"places": places})
     }
 }
 export function removeFromFavoritesThunk(userId: string, favorites: Favorite, place: Place) {

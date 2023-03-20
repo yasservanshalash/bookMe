@@ -59,6 +59,9 @@ const NavBar = () => {
                 Properties
               </Typography>
             </Link>
+            <Typography component={Link} to="/favorites" sx={{textDecoration: "none", color: "black"}}>
+            Favorites
+          </Typography>
           </Box>
         </Box>
         <Box
@@ -95,9 +98,9 @@ const NavBar = () => {
             mr: 5,
           }}>
           {/* <img src={user.avatar} alt="avatar" style={{width: "50px", borderRadius: "50%"}}/> */}
-          <Typography component={Link} to="/favorites" sx={{textDecoration: "none", color: "black"}}>
+          {/* <Typography component={Link} to="/favorites" sx={{textDecoration: "none", color: "black"}}>
             Favorites
-          </Typography>
+          </Typography> */}
           <IconButton
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}

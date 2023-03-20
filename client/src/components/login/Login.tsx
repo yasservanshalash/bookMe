@@ -9,8 +9,11 @@ import { userActions } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 import GoogleLogIn from "../GoogleLogIn";
 import { useState } from "react";
+import { AppDispatch } from "../../redux/store";
+import { fetchFavorites } from "../../redux/thunk/favoriteThunk";
 const Login = () => {
   const nav = useNavigate();
+  const dispatchThunk = useDispatch<AppDispatch>();
   const dispatch = useDispatch();
   type InitialValues = {
     email: string;
@@ -66,6 +69,8 @@ const Login = () => {
                 );
 
                 dispatch(userActions.logIn(response.data.userData));
+                dispatchThunk(fetchFavorites("http://localhost:8013/wishlist/" + response.data.userData._id))
+
                 if (!response.data.userData.isBanned) {
                   nav("/");
                   setOpen(false);

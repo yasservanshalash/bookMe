@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
@@ -35,6 +35,8 @@ const SignUp = () => {
       .required("Please Enter your password"),
   });
 
+  const [userId, setUserId] = useState("")
+
   return (
     <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", my: 3}}>
       <Formik
@@ -43,7 +45,14 @@ const SignUp = () => {
         onSubmit={(values: InitialValues) => {
           console.log(values);
           axios.post('http://localhost:8013/users/', values).then((response) => {
-            console.log(response.data)
+            if(response.status === 200) {
+              console.log(response.data.newUser._id, "i am here");
+              axios.post('http://localhost:8013/wishlist/', { userId: response.data.newUser._id, places: ["641244e65038e45c66694db6"] }).then((res) => {
+                if(res.status === 200) {
+                    console.log(res.data)
+                }
+              })
+            }
             nav("/login")
         })
         }}
