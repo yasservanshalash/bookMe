@@ -1,5 +1,5 @@
 //server here //
-import Express from "Express";
+import express from "express";
 import cors from "cors";
 
 
@@ -12,8 +12,8 @@ import placeRouter from "./routes/place";
 import wishListRouter from "./routes/wishList";
 import reviewRouter from "./routes/review";
 import reservationRouter from "./routes/reservation";
-const app = Express();
-app.use(Express.json());
+const app = express();
+app.use(express.json());
 app.use(cors());
 app.use("/reservation", reservationRouter);
 app.use("/users", userRouter);

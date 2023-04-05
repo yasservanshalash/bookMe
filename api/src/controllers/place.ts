@@ -1,4 +1,4 @@
-import { Request, Response } from "Express";
+import { Request, Response } from "express";
 
 import Place from "../models/Place";
 import PlaceService from "../services/place";

@@ -1,4 +1,4 @@
-import { Request, Response } from "Express";
+import { Request, Response } from "express";
 import Review from "../models/Review";
 import ReviewService from "../services/reviews";
 export const createReviewController = async (req: Request, res: Response) => {

@@ -1,5 +1,5 @@
 // User router here
-import { Router } from "Express";
+import { Router } from "express";
 import {
   createUserController,
   loginWithPasswordController,

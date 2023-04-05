@@ -1,4 +1,4 @@
-import { Request, Response } from "Express";
+import { Request, Response } from "express";
 import WishList from "../models/WishList";
 import { WishListDocument } from "../models/WishList";
 import wishList from "../services/wishList";
